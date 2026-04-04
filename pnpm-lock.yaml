@@ -24,8 +24,8 @@ importers:
   packages/claude-code:
     dependencies:
       '@realtapel/skillpilot-core':
-        specifier: workspace:*
-        version: link:../core
+        specifier: 0.1.0
+        version: 0.1.0(typescript@5.9.3)
     devDependencies:
       tsup:
         specifier: ^8.3.0
@@ -34,8 +34,8 @@ importers:
   packages/cli:
     dependencies:
       '@realtapel/skillpilot-core':
-        specifier: workspace:*
-        version: link:../core
+        specifier: 0.1.0
+        version: 0.1.0(typescript@5.9.3)
       chalk:
         specifier: ^5.3.0
         version: 5.6.2
@@ -102,8 +102,8 @@ importers:
         specifier: ^0.3.0
         version: 0.3.80
       '@realtapel/skillpilot-core':
-        specifier: workspace:*
-        version: link:../core
+        specifier: 0.1.0
+        version: 0.1.0(typescript@5.9.3)
     devDependencies:
       tsup:
         specifier: ^8.3.0
@@ -112,8 +112,8 @@ importers:
   packages/openclaw:
     dependencies:
       '@realtapel/skillpilot-core':
-        specifier: workspace:*
-        version: link:../core
+        specifier: 0.1.0
+        version: 0.1.0(typescript@5.9.3)
       openclaw:
         specifier: ^0.x
         version: 0.0.1
@@ -503,6 +503,12 @@ packages:
   '@langchain/core@0.3.80':
     resolution: {integrity: sha512-vcJDV2vk1AlCwSh3aBm/urQ1ZrlXFFBocv11bz/NBUfLWD5/UDNMzwPdaAd2dKvNmTWa9FM2lirLU3+JCf4cRA==}
     engines: {node: '>=18'}
+
+  '@realtapel/skillpilot-core@0.1.0':
+    resolution: {integrity: sha512-9Nm10HxQDapqR+/n03J3zeP5pAMjXbf8wHKXlxMjZXIYgH6OLcZF5X7OOcx8aFGa/+BZQWQAy9reYfZPzZUtkw==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      typescript: ^5.4.0
 
   '@rollup/rollup-android-arm-eabi@4.60.1':
     resolution: {integrity: sha512-d6FinEBLdIiK+1uACUttJKfgZREXrF0Qc2SmLII7W2AD8FfiZ9Wjd+rD/iRuf5s5dWrr1GgwXCvPqOuDquOowA==}
@@ -2004,6 +2010,16 @@ snapshots:
       - '@opentelemetry/exporter-trace-otlp-proto'
       - '@opentelemetry/sdk-trace-base'
       - openai
+
+  '@realtapel/skillpilot-core@0.1.0(typescript@5.9.3)':
+    dependencies:
+      better-sqlite3: 12.8.0
+      cosmiconfig: 9.0.1(typescript@5.9.3)
+      gray-matter: 4.0.3
+      js-yaml: 4.1.1
+      onnxruntime-node: 1.24.3
+      typescript: 5.9.3
+      zod: 3.25.76
 
   '@rollup/rollup-android-arm-eabi@4.60.1':
     optional: true

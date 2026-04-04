@@ -42,11 +42,43 @@ Execute Skill OR Inject Context
 
 ## Installation
 
-```bash
-# Install CLI
-npm install -g @realtapel/skillpilot
+### Method 1: Global Install (Recommended)
 
-# Or use with your agent framework
+```bash
+# Using pnpm (recommended)
+pnpm add -g @realtapel/skillpilot
+
+# Or using npm
+npm install -g @realtapel/skillpilot
+```
+
+### Method 2: Local Development
+
+Clone and build from source:
+
+```bash
+# Clone repository
+git clone https://github.com/RealTapeL/SkillPilot.git
+cd SkillPilot
+
+# Install dependencies
+pnpm install
+
+# Build all packages
+pnpm run build
+
+# Compile native modules (better-sqlite3)
+cd node_modules/.pnpm/better-sqlite3@*/node_modules/better-sqlite3
+npm run build-release
+
+# Create alias for easy usage
+echo 'alias skillpilot="node /path/to/SkillPilot/packages/cli/dist/index.js"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+### Install Adapters
+
+```bash
 npm install @realtapel/skillpilot-openclaw    # For OpenClaw
 npm install @realtapel/skillpilot-claude-code # For Claude Code
 npm install @realtapel/skillpilot-langchain   # For LangChain
@@ -59,23 +91,48 @@ npm install @realtapel/skillpilot-langchain   # For LangChain
 ### CLI Usage
 
 ```bash
-# Index your skills
+# 1. Index your skills (first time setup)
 skillpilot index ~/.openclaw/skills ~/.claude/skills
+# Or use local development version:
+# node packages/cli/dist/index.js index ~/.openclaw/skills
 
-# Route a query
+# 2. Route a query
 skillpilot route "create a GitHub issue"
 # Output:
 # ✓ github  (confidence: 0.94, method: semantic, 18ms)
 #   Description: Interact with GitHub repositories, issues...
 
-# Explain routing decision
+# 3. Explain routing decision
 skillpilot explain "send a slack message"
+# Shows detailed scoring and conflict resolution
 
-# View conflict groups
+# 4. View conflict groups
 skillpilot conflicts
 
-# View statistics
+# 5. View statistics
 skillpilot stats
+
+# 6. Record feedback (for self-learning)
+skillpilot feedback correct --wrong slack --right slack-advanced --query "bulk send"
+```
+
+### Using Local Build
+
+If you installed from source:
+
+```bash
+cd /path/to/SkillPilot/packages/cli
+
+# Index skills
+node dist/index.js index /path/to/skills
+
+# Route query
+node dist/index.js route "deploy to production"
+
+# Or create an alias
+echo 'alias sp="node /path/to/SkillPilot/packages/cli/dist/index.js"' >> ~/.bashrc
+source ~/.bashrc
+sp route "create GitHub issue"
 ```
 
 ### OpenClaw Integration
@@ -274,6 +331,53 @@ feedback:
   enabled: true
   batchSize: 10
 ```
+
+---
+
+## Troubleshooting
+
+### Error: "Could not locate the bindings file" (better-sqlite3)
+
+This error occurs when the native SQLite module is not compiled. Fix:
+
+```bash
+# Navigate to better-sqlite3 directory
+cd node_modules/.pnpm/better-sqlite3@*/node_modules/better-sqlite3
+
+# Compile native module
+npm run build-release
+
+# Or reinstall with build scripts
+pnpm rebuild better-sqlite3
+```
+
+### Global install permission error
+
+If you get `EACCES` errors during global install:
+
+```bash
+# Method 1: Use pnpm (recommended)
+pnpm add -g @realtapel/skillpilot
+
+# Method 2: Use npx (no install needed)
+npx @realtapel/skillpilot route "create GitHub issue"
+
+# Method 3: Change npm global directory
+mkdir ~/.npm-global
+npm config set prefix '~/.npm-global'
+echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+```
+
+### ONNX model not found warning
+
+This is normal - SkillPilot will use a fallback embedding method:
+
+```
+ONNX model not found at ~/.skillpilot/models/all-MiniLM-L6-v2.onnx, using fallback embedding
+```
+
+To use the full ONNX model, download it separately or configure OpenAI embedding in `~/.skillpilot/config.yaml`.
 
 ---
 
