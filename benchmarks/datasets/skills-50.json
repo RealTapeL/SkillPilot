@@ -1,0 +1,144 @@
+{
+  "skills": [
+    {
+      "id": "github",
+      "name": "github",
+      "description": "Interact with GitHub repositories, issues, pull requests, and workflows",
+      "keywords": ["github", "git", "repository", "issue", "pr", "commit", "branch", "merge"],
+      "sideEffects": "write-remote"
+    },
+    {
+      "id": "github-advanced",
+      "name": "github-advanced",
+      "description": "Advanced GitHub operations: bulk actions, webhooks, API management, team permissions",
+      "keywords": ["github", "advanced", "bulk", "webhook", "api", "permission", "team"],
+      "sideEffects": "write-remote"
+    },
+    {
+      "id": "slack",
+      "name": "slack",
+      "description": "Send messages and notifications to Slack channels",
+      "keywords": ["slack", "message", "notification", "channel", "send"],
+      "sideEffects": "write-remote"
+    },
+    {
+      "id": "slack-advanced",
+      "name": "slack-advanced",
+      "description": "Advanced Slack operations: bulk messaging, workflow management, app integration",
+      "keywords": ["slack", "advanced", "bulk", "workflow", "app", "integration"],
+      "sideEffects": "write-remote"
+    },
+    {
+      "id": "discord",
+      "name": "discord",
+      "description": "Send messages to Discord channels and manage server settings",
+      "keywords": ["discord", "message", "channel", "server"],
+      "sideEffects": "write-remote"
+    },
+    {
+      "id": "telegram",
+      "name": "telegram",
+      "description": "Send messages via Telegram bot API",
+      "keywords": ["telegram", "message", "bot", "send"],
+      "sideEffects": "write-remote"
+    },
+    {
+      "id": "email",
+      "name": "email",
+      "description": "Send emails via SMTP",
+      "keywords": ["email", "smtp", "send", "mail"],
+      "sideEffects": "write-remote"
+    },
+    {
+      "id": "file-read",
+      "name": "file-read",
+      "description": "Read file contents",
+      "keywords": ["file", "read", "content", "text"],
+      "sideEffects": "read-only"
+    },
+    {
+      "id": "file-write",
+      "name": "file-write",
+      "description": "Write content to files",
+      "keywords": ["file", "write", "save", "create"],
+      "sideEffects": "write-local"
+    },
+    {
+      "id": "search-files",
+      "name": "search-files",
+      "description": "Search for files by name or content",
+      "keywords": ["file", "search", "find", "grep"],
+      "sideEffects": "read-only"
+    },
+    {
+      "id": "docker",
+      "name": "docker",
+      "description": "Manage Docker containers and images",
+      "keywords": ["docker", "container", "image", "build", "run"],
+      "sideEffects": "write-local"
+    },
+    {
+      "id": "kubernetes",
+      "name": "kubernetes",
+      "description": "Manage Kubernetes deployments and resources",
+      "keywords": ["kubernetes", "k8s", "pod", "deployment", "cluster"],
+      "sideEffects": "write-remote"
+    },
+    {
+      "id": "aws",
+      "name": "aws",
+      "description": "Interact with AWS services",
+      "keywords": ["aws", "s3", "ec2", "lambda", "cloud"],
+      "sideEffects": "write-remote"
+    },
+    {
+      "id": "database-query",
+      "name": "database-query",
+      "description": "Execute database queries",
+      "keywords": ["database", "db", "sql", "query"],
+      "sideEffects": "read-only"
+    },
+    {
+      "id": "database-write",
+      "name": "database-write",
+      "description": "Write data to databases",
+      "keywords": ["database", "db", "insert", "update", "write"],
+      "sideEffects": "write-remote"
+    },
+    {
+      "id": "http-request",
+      "name": "http-request",
+      "description": "Make HTTP requests to APIs",
+      "keywords": ["http", "api", "request", "get", "post", "fetch"],
+      "sideEffects": "network"
+    },
+    {
+      "id": "test-runner",
+      "name": "test-runner",
+      "description": "Run test suites and report results",
+      "keywords": ["test", "run", "jest", "mocha", "pytest"],
+      "sideEffects": "read-only"
+    },
+    {
+      "id": "build",
+      "name": "build",
+      "description": "Build projects using various build tools",
+      "keywords": ["build", "compile", "webpack", "vite", "rollup"],
+      "sideEffects": "write-local"
+    },
+    {
+      "id": "deploy",
+      "name": "deploy",
+      "description": "Deploy applications to various platforms",
+      "keywords": ["deploy", "publish", "release", "production"],
+      "sideEffects": "write-remote"
+    },
+    {
+      "id": "npm",
+      "name": "npm",
+      "description": "Manage npm packages and run scripts",
+      "keywords": ["npm", "package", "install", "script", "node"],
+      "sideEffects": "write-local"
+    }
+  ]
+}

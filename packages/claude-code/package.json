@@ -1,0 +1,38 @@
+{
+  "name": "@skillpilot/claude-code",
+  "version": "0.1.0",
+  "description": "Claude Code hook adapter for SkillPilot",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "skillpilot-claude": "./dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts src/cli.ts --format esm --dts",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@skillpilot/core": "0.1.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "claude-code",
+    "skill",
+    "router",
+    "agent"
+  ],
+  "author": "SkillPilot Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

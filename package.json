@@ -1,0 +1,38 @@
+{
+  "name": "skillpilot",
+  "version": "0.1.0",
+  "description": "Universal Agent Skill Router - Route skills before LLM inference",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "pnpm -r build",
+    "test": "vitest",
+    "lint": "eslint packages/**/*.ts",
+    "clean": "pnpm -r clean",
+    "publish:all": "npm publish packages/core && npm publish packages/cli && npm publish packages/openclaw && npm publish packages/claude-code && npm publish packages/langchain"
+  },
+  "keywords": [
+    "agent",
+    "skill",
+    "router",
+    "llm",
+    "ai",
+    "openclaw",
+    "claude-code"
+  ],
+  "author": "SkillPilot Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/skillpilot.git"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.4.0",
+    "vitest": "^2.0.0",
+    "eslint": "^9.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

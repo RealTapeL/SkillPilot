@@ -1,0 +1,20 @@
+{
+  "id": "skillpilot",
+  "name": "SkillPilot",
+  "version": "0.1.0",
+  "description": "Universal Agent Skill Router - Route skills before LLM inference",
+  "entry": "./dist/index.js",
+  "hooks": [
+    "before_dispatch",
+    "before_agent_reply"
+  ],
+  "commands": [
+    "skillpilot"
+  ],
+  "config": {
+    "hardRouteThreshold": 0.80,
+    "softInjectThreshold": 0.45,
+    "showRoutingInfo": false,
+    "showConflictInfo": true
+  }
+}
