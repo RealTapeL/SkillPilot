@@ -8,7 +8,7 @@ import {
   LocalEmbedProvider,
   Fingerprinter,
   ConflictDetector
-} from '@skillpilot/core';
+} from '@realtapel/skillpilot-core';
 import * as path from 'path';
 import * as fs from 'fs/promises';
 import { fileURLToPath } from 'url';

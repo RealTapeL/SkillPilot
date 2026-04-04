@@ -23,7 +23,7 @@ importers:
 
   packages/claude-code:
     dependencies:
-      '@skillpilot/core':
+      '@realtapel/skillpilot-core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -33,7 +33,7 @@ importers:
 
   packages/cli:
     dependencies:
-      '@skillpilot/core':
+      '@realtapel/skillpilot-core':
         specifier: workspace:*
         version: link:../core
       chalk:
@@ -101,7 +101,7 @@ importers:
       '@langchain/core':
         specifier: ^0.3.0
         version: 0.3.80
-      '@skillpilot/core':
+      '@realtapel/skillpilot-core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -111,7 +111,7 @@ importers:
 
   packages/openclaw:
     dependencies:
-      '@skillpilot/core':
+      '@realtapel/skillpilot-core':
         specifier: workspace:*
         version: link:../core
       openclaw:

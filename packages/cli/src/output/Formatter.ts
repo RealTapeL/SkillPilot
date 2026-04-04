@@ -6,7 +6,7 @@
 
 import chalk from 'chalk';
 import Table from 'cli-table3';
-import { RouteResult, SkillFingerprint, ConflictGroup, IndexStats } from '@skillpilot/core';
+import { RouteResult, SkillFingerprint, ConflictGroup, IndexStats } from '@realtapel/skillpilot-core';
 
 export class Formatter {
   /**

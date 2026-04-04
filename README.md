@@ -3,6 +3,7 @@
 > **Universal Agent Skill Router** — Route agent skills before LLM inference
 
 [![Platform](https://img.shields.io/badge/platform-OpenClaw%20%7C%20Claude%20Code%20%7C%20Codex%20%7C%20LangChain-blue)]()
+[![npm](https://img.shields.io/npm/v/@realtapel/skillpilot)](https://www.npmjs.com/package/@realtapel/skillpilot)
 [![License](https://img.shields.io/badge/license-MIT-green)]()
 
 **Your agent has 1,000 skills. SkillPilot makes sure it uses the right one.**
@@ -43,12 +44,12 @@ Execute Skill OR Inject Context
 
 ```bash
 # Install CLI
-npm install -g skillpilot
+npm install -g @realtapel/skillpilot
 
 # Or use with your agent framework
-npm install @skillpilot/openclaw    # For OpenClaw
-npm install @skillpilot/claude-code # For Claude Code
-npm install @skillpilot/langchain   # For LangChain
+npm install @realtapel/skillpilot-openclaw    # For OpenClaw
+npm install @realtapel/skillpilot-claude-code # For Claude Code
+npm install @realtapel/skillpilot-langchain   # For LangChain
 ```
 
 ---
@@ -81,7 +82,7 @@ skillpilot stats
 
 ```typescript
 // In your OpenClaw plugin
-import { createOpenClawPlugin } from '@skillpilot/openclaw';
+import { createOpenClawPlugin } from '@realtapel/skillpilot-openclaw';
 
 export default createOpenClawPlugin();
 ```
@@ -103,9 +104,9 @@ If the output indicates a skill should be used, prefer that skill.
 ### LangChain Integration
 
 ```typescript
-import { SkillPilotTool } from '@skillpilot/langchain';
+import { SkillRouteTool } from '@realtapel/skillpilot-langchain';
 
-const router = new SkillPilotTool({ skillDir: './skills' });
+const router = new SkillRouteTool({ skillDir: './skills' });
 await router.initialize();
 
 const result = await router.invoke("create a GitHub issue");
@@ -280,7 +281,7 @@ feedback:
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/skillpilot.git
+git clone https://github.com/RealTapeL/SkillPilot.git
 cd skillpilot
 
 # Install dependencies
@@ -302,11 +303,13 @@ pnpm bench
 
 | Package | Description |
 |---------|-------------|
-| `@skillpilot/core` | Core routing engine |
-| `skillpilot` | CLI tool |
-| `@skillpilot/openclaw` | OpenClaw plugin adapter |
-| `@skillpilot/claude-code` | Claude Code hook adapter |
-| `@skillpilot/langchain` | LangChain tool adapter |
+| Package | Description | npm |
+|---------|-------------|-----|
+| `@realtapel/skillpilot-core` | Core routing engine | [🔗](https://www.npmjs.com/package/@realtapel/skillpilot-core) |
+| `@realtapel/skillpilot` | CLI tool | [🔗](https://www.npmjs.com/package/@realtapel/skillpilot) |
+| `@realtapel/skillpilot-openclaw` | OpenClaw plugin adapter | [🔗](https://www.npmjs.com/package/@realtapel/skillpilot-openclaw) |
+| `@realtapel/skillpilot-claude-code` | Claude Code hook adapter | [🔗](https://www.npmjs.com/package/@realtapel/skillpilot-claude-code) |
+| `@realtapel/skillpilot-langchain` | LangChain tool adapter | [🔗](https://www.npmjs.com/package/@realtapel/skillpilot-langchain) |
 
 ---
 

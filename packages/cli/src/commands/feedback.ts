@@ -9,7 +9,7 @@ import { Command } from 'commander';
 import { 
   SkillIndex, 
   FeedbackRecorder 
-} from '@skillpilot/core';
+} from '@realtapel/skillpilot-core';
 import { getDataDir } from '../config.js';
 import { Formatter } from '../output/Formatter.js';
 

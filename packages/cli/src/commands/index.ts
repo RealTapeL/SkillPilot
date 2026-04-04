@@ -11,7 +11,7 @@ import {
   SkillIndex, 
   IndexBuilder, 
   LocalEmbedProvider 
-} from '@skillpilot/core';
+} from '@realtapel/skillpilot-core';
 import { getDataDir, getConfig } from '../config.js';
 import { Formatter } from '../output/Formatter.js';
 

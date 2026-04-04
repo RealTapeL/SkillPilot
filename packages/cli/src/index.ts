@@ -13,7 +13,7 @@ import { registerExplainCommand } from './commands/explain.js';
 import { registerConflictsCommand } from './commands/conflicts.js';
 import { registerStatsCommand } from './commands/stats.js';
 import { registerFeedbackCommand } from './commands/feedback.js';
-import { VERSION } from '@skillpilot/core';
+import { VERSION } from '@realtapel/skillpilot-core';
 
 const program = new Command();
 

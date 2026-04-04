@@ -1,5 +1,5 @@
 {
-  "name": "@skillpilot/claude-code",
+  "name": "@realtapel/skillpilot-claude-code",
   "version": "0.1.0",
   "description": "Claude Code hook adapter for SkillPilot",
   "type": "module",
@@ -16,7 +16,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@skillpilot/core": "0.1.0"
+    "@realtapel/skillpilot-core": "0.1.0"
   },
   "devDependencies": {
     "tsup": "^8.3.0"

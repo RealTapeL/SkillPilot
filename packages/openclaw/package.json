@@ -1,5 +1,5 @@
 {
-  "name": "@skillpilot/openclaw",
+  "name": "@realtapel/skillpilot-openclaw",
   "version": "0.1.0",
   "description": "OpenClaw plugin adapter for SkillPilot",
   "type": "module",
@@ -20,7 +20,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@skillpilot/core": "0.1.0"
+    "@realtapel/skillpilot-core": "0.1.0"
   },
   "devDependencies": {
     "tsup": "^8.3.0"

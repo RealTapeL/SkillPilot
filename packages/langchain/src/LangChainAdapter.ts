@@ -11,7 +11,7 @@ import {
   LocalEmbedProvider,
   SkillFingerprint,
   DEFAULT_ROUTER_CONFIG
-} from '@skillpilot/core';
+} from '@realtapel/skillpilot-core';
 
 // Minimal BaseTool-like interface to avoid peer dependency issues
 interface ToolParams {
@@ -40,7 +40,7 @@ export interface LangChainAdapterOptions {
  * 
  * Usage:
  * ```typescript
- * import { SkillPilotTool } from '@skillpilot/langchain';
+ * import { SkillPilotTool } from '@realtapel/langchain';
  * 
  * const router = new SkillPilotTool({ skillDir: './skills' });
  * await router.initialize();

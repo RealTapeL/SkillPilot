@@ -1,5 +1,5 @@
 {
-  "name": "@skillpilot/core",
+  "name": "@realtapel/skillpilot-core",
   "version": "0.1.0",
   "description": "Core routing engine for SkillPilot",
   "type": "module",

@@ -20,7 +20,7 @@ import {
   SkillIndex, 
   LocalEmbedProvider,
   DEFAULT_ROUTER_CONFIG
-} from '@skillpilot/core';
+} from '@realtapel/skillpilot-core';
 
 export interface ClaudeCodeAdapterOptions {
   skillDir?: string;

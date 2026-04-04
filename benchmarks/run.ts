@@ -16,7 +16,7 @@ import {
   IndexBuilder,
   Fingerprinter,
   ConflictDetector
-} from '@skillpilot/core';
+} from '@realtapel/skillpilot-core';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 

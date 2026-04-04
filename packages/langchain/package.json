@@ -1,5 +1,5 @@
 {
-  "name": "@skillpilot/langchain",
+  "name": "@realtapel/skillpilot-langchain",
   "version": "0.1.0",
   "description": "LangChain tool adapter for SkillPilot",
   "type": "module",
@@ -19,7 +19,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@skillpilot/core": "0.1.0"
+    "@realtapel/skillpilot-core": "0.1.0"
   },
   "devDependencies": {
     "tsup": "^8.3.0"

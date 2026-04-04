@@ -6,7 +6,7 @@
  */
 
 import { Command } from 'commander';
-import { SkillIndex } from '@skillpilot/core';
+import { SkillIndex } from '@realtapel/skillpilot-core';
 import { getDataDir } from '../config.js';
 import { Formatter } from '../output/Formatter.js';
 

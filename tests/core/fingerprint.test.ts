@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeAll } from 'vitest';
-import { Fingerprinter, ConflictDetector } from '@skillpilot/core';
-import { LocalEmbedProvider } from '@skillpilot/core';
+import { Fingerprinter, ConflictDetector } from '@realtapel/skillpilot-core';
+import { LocalEmbedProvider } from '@realtapel/skillpilot-core';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
 

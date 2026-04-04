@@ -11,7 +11,7 @@ import {
   LocalEmbedProvider,
   SkillFingerprint,
   FeedbackRecorder
-} from '@skillpilot/core';
+} from '@realtapel/skillpilot-core';
 
 // Types for OpenClaw Plugin SDK (mocked for now)
 interface OpenClawAPI {
