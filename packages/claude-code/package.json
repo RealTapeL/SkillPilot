@@ -32,6 +32,11 @@
   ],
   "author": "SkillPilot Team",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RealTapeL/SkillPilot.git",
+    "directory": "packages/claude-code"
+  },
   "engines": {
     "node": ">=18.0.0"
   }

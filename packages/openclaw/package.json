@@ -40,6 +40,11 @@
   ],
   "author": "SkillPilot Team",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RealTapeL/SkillPilot.git",
+    "directory": "packages/openclaw"
+  },
   "engines": {
     "node": ">=18.0.0"
   }
