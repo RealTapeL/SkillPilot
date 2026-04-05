@@ -42,18 +42,34 @@ const explorer = cosmiconfigSync('skillpilot', {
     '.skillpilotrc.yaml',
     '.skillpilotrc.yml',
     'skillpilot.config.js',
-    'skillpilot.config.json'
+    'skillpilot.config.json',
+    '.skillpilot/config.yaml',
+    '.skillpilot/config.json'
   ]
 });
 
 export function getConfig(): Config {
+  // Try to find config in current directory hierarchy
   const result = explorer.search();
   
   if (result && result.config) {
     return configSchema.parse(result.config);
   }
   
-  return configSchema.parse({});
+  // Fallback: load from ~/.skillpilot/config.yaml
+  const homeDir = os.homedir();
+  const globalConfigPath = path.join(homeDir, '.skillpilot', 'config.yaml');
+  
+  try {
+    const fs = require('fs');
+    const yaml = require('js-yaml');
+    const content = fs.readFileSync(globalConfigPath, 'utf-8');
+    const parsed = yaml.load(content);
+    return configSchema.parse(parsed);
+  } catch {
+    // No config found, use defaults
+    return configSchema.parse({});
+  }
 }
 
 export function getDataDir(): string {

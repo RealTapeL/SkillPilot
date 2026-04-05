@@ -121,9 +121,18 @@ export class ConflictResolver {
       }
     }
 
-    // Boost if skill name appears in query
-    if (skill.name && lowerQuery.includes(skill.name.toLowerCase())) {
-      score += 5;
+    // Boost if skill name appears in query (as whole word)
+    if (skill.name) {
+      const nameLower = skill.name.toLowerCase();
+      // Check for exact match or word boundary match
+      const wordBoundaryMatch = new RegExp(`\\b${nameLower}\\b`).test(lowerQuery);
+      const exactMatch = lowerQuery.includes(nameLower);
+      
+      if (wordBoundaryMatch) {
+        score += 5 + nameLower.length * 0.2; // Prefer longer names
+      } else if (exactMatch) {
+        score += 3; // Partial match gets lower score
+      }
     }
 
     // Boost for manual trigger matches

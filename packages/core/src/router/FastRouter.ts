@@ -28,6 +28,11 @@ export class FastRouter {
       if (result && result.score >= minScore) {
         if (!bestMatch || result.score > bestMatch.score) {
           bestMatch = result;
+        } else if (result.score === bestMatch.score) {
+          // Tie-breaker: prefer more specific skill names (longer is more specific)
+          if (skill.name.length > bestMatch.skill.name.length) {
+            bestMatch = result;
+          }
         }
       }
     }
@@ -86,8 +91,9 @@ export class FastRouter {
     }
 
     // Boost score if skill name appears in query
+    // Prefer longer matches (e.g., 'github' over 'git')
     if (skill.name && lowerQuery.includes(skill.name.toLowerCase())) {
-      keywordScore += 5;
+      keywordScore += 5 + skill.name.length * 0.2;
     }
 
     // Fuzzy matching: check if query words overlap with skill description/triggers
