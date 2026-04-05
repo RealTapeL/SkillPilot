@@ -14,6 +14,26 @@ python openclaw_mock.py        # OpenClaw 模拟
 python benchmark.py            # 性能测试
 ```
 
+### Web 界面查看结果
+
+浏览器打开 `dashboard.html` 查看可视化测试结果：
+
+```bash
+# 方法1: 直接用浏览器打开
+open dashboard.html  # macOS
+xdg-open dashboard.html  # Linux
+
+# 方法2: 启动简单 HTTP 服务器
+python -m http.server 8080
+# 然后访问 http://localhost:8080/dashboard.html
+```
+
+**功能特性：**
+- 实时展示准确率、延迟等关键指标
+- 可视化进度条和统计卡片
+- 详细测试结果表格（通过/失败状态）
+- 自动从 `results/test_results.json` 加载数据
+
 ## 项目结构
 
 ```
