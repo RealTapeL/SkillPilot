@@ -1,6 +1,6 @@
-# SkillPilot - 技能领航员
+# SkillPilot
 
-> **通用 Agent Skill 智能路由引擎** —— 在 LLM 推理之前自动路由技能
+> **通用 Agent Skill 智能路由引擎** —— 在 LLM 推理之前完成技能路由
 
 [![Platform](https://img.shields.io/badge/platform-OpenClaw%20%7C%20Claude%20Code%20%7C%20Codex%20%7C%20LangChain-blue)]()
 [![npm](https://img.shields.io/npm/v/@realtapel/skillpilot)](https://www.npmjs.com/package/@realtapel/skillpilot)
@@ -10,7 +10,7 @@
 
 ---
 
-## 解决的问题
+## 问题所在
 
 当前主流的 Agent 框架（OpenClaw、Claude Code、Codex 等）处理技能选择的方式只有一种：把**所有技能描述塞进系统提示词**，让 LLM 自己决定。这带来三个问题：
 
@@ -22,10 +22,10 @@
 
 ## 解决方案
 
-SkillPilot 在 LLM 推理**之前**完成技能路由，使用向量语义匹配在 **< 25ms** 内找到正确的技能：
+SkillPilot 在 LLM 推理**之前**完成技能路由，使用向量语义匹配：
 
 ```
-用户消息
+用户查询
     ↓
 SkillPilot 路由器（快速路径：< 2ms）
     ↓
@@ -36,59 +36,7 @@ SkillPilot 路由器（快速路径：< 2ms）
 执行技能 或 注入上下文
 ```
 
-**总路由时间：< 25ms** —— 对比 LLM 等待 1-5 秒
-
----
-
-## 核心特性
-
-### 🎯 零配置技能指纹
-
-SkillPilot 自动解析任意 `SKILL.md` 并提取：
-- 语义嵌入向量
-- 意图模式
-- 关键词
-- 副作用分类
-
-无需手动配置，安装技能即可路由。
-
-### ⚡ 三阶段路由
-
-| 阶段 | 时间 | 用途 |
-|------|------|------|
-| 快速路径 | < 2ms | 关键词 + 触发短语匹配 |
-| 语义路径 | < 20ms | 向量相似度匹配 |
-| 冲突消解 | < 5ms | 解决技能功能重叠冲突 |
-
-### 🤝 冲突感知路由
-
-自动检测并解决相似技能之间的冲突（如 `github` vs `github-advanced`）：
-
-```bash
-$ skillpilot conflicts
-冲突组 A (相似度 0.91):
-  github · github-advanced · github-enterprise
-  提示: 添加 route.prefer_when 来消除歧义
-```
-
-### 🔄 自学习
-
-记录路由反馈并自动调整权重：
-
-```bash
-# 记录一次纠正
-skillpilot feedback correct --wrong slack --right slack-advanced --query "批量发送"
-```
-
-### 🔌 跨平台
-
-同一个索引，多个平台共享：
-
-```
-~/.skillpilot/index/  ←── 跨平台共享
-        ↑               ↑               ↑
-  OpenClaw        Claude Code     CLI 工具
-```
+**总路由时间：< 25ms** —— 对比等待 LLM 的 1-5 秒
 
 ---
 
@@ -131,9 +79,9 @@ source ~/.bashrc
 ### 安装适配器
 
 ```bash
-npm install @realtapel/skillpilot-openclaw    # OpenClaw 插件
-npm install @realtapel/skillpilot-claude-code # Claude Code 钩子
-npm install @realtapel/skillpilot-langchain   # LangChain 工具
+npm install @realtapel/skillpilot-openclaw    # OpenClaw
+npm install @realtapel/skillpilot-claude-code # Claude Code
+npm install @realtapel/skillpilot-langchain   # LangChain
 ```
 
 ---
@@ -143,20 +91,20 @@ npm install @realtapel/skillpilot-langchain   # LangChain 工具
 ### CLI 使用
 
 ```bash
-# 1. 索引技能（首次使用）
+# 1. 索引技能（首次设置）
 skillpilot index ~/.openclaw/skills ~/.claude/skills
-# 或使用本地版本：
+# 或使用本地开发版本：
 # node packages/cli/dist/index.js index ~/.openclaw/skills
 
 # 2. 路由查询
-skillpilot route "在 GitHub 上创建一个 issue"
+skillpilot route "create a GitHub issue"
 # 输出：
-# ✓ github  (置信度: 0.94, 方法: 语义匹配, 18ms)
-#   描述: 与 GitHub 仓库、issue、PR 交互...
+# ✓ github  (confidence: 0.94, method: semantic, 18ms)
+#   Description: Interact with GitHub repositories, issues...
 
 # 3. 解释路由决策
-skillpilot explain "发送 Slack 消息"
-# 显示详细评分和冲突消解过程
+skillpilot explain "send a slack message"
+# 显示详细评分和冲突消解
 
 # 4. 查看冲突组
 skillpilot conflicts
@@ -165,7 +113,7 @@ skillpilot conflicts
 skillpilot stats
 
 # 6. 记录反馈（用于自学习）
-skillpilot feedback correct --wrong slack --right slack-advanced --query "批量发送"
+skillpilot feedback correct --wrong slack --right slack-advanced --query "bulk send"
 ```
 
 ### 使用本地构建
@@ -179,12 +127,12 @@ cd /path/to/SkillPilot/packages/cli
 node dist/index.js index /path/to/skills
 
 # 路由查询
-node dist/index.js route "部署到生产环境"
+node dist/index.js route "deploy to production"
 
 # 或创建别名
 echo 'alias sp="node /path/to/SkillPilot/packages/cli/dist/index.js"' >> ~/.bashrc
 source ~/.bashrc
-sp route "创建 GitHub issue"
+sp route "create GitHub issue"
 ```
 
 ### OpenClaw 集成
@@ -218,8 +166,60 @@ import { SkillRouteTool } from '@realtapel/skillpilot-langchain';
 const router = new SkillRouteTool({ skillDir: './skills' });
 await router.initialize();
 
-const result = await router.invoke("创建 GitHub issue");
+const result = await router.invoke("create a GitHub issue");
 // { skill: "github", confidence: 0.94, shouldUse: true }
+```
+
+---
+
+## 核心特性
+
+### 🎯 零配置技能指纹
+
+SkillPilot 自动解析任意 `SKILL.md` 并提取：
+- 语义嵌入向量
+- 意图模式
+- 关键词
+- 副作用分类
+
+无需手动配置。安装技能 → 即可路由。
+
+### ⚡ 三阶段路由
+
+| 阶段 | 时间 | 用途 |
+|------|------|------|
+| 快速路径 | < 2ms | 关键词 + 触发短语匹配 |
+| 语义路径 | < 20ms | 向量相似度匹配 |
+| 冲突消解 | < 5ms | 解决技能功能重叠冲突 |
+
+### 🤝 冲突感知路由
+
+自动检测并解决相似技能之间的冲突（如 `github` vs `github-advanced`）：
+
+```bash
+$ skillpilot conflicts
+Conflict Group A (similarity 0.91):
+  github · github-advanced · github-enterprise
+  Tip: Add route.prefer_when to disambiguate
+```
+
+### 🔄 自学习
+
+记录路由反馈并自动调整权重：
+
+```bash
+# 记录一次纠正
+skillpilot feedback correct --wrong slack --right slack-advanced --query "bulk send"
+```
+
+### 🔌 跨平台
+
+同一个索引，多个平台共享：
+
+```
+~/.skillpilot/index/  ←── 跨平台共享
+        ↑               ↑               ↑
+  OpenClaw        Claude Code     CLI Tool
 ```
 
 ---
@@ -231,12 +231,12 @@ SkillPilot 可以从任意 `SKILL.md` 自动提取指纹。为了更精确的路
 ```yaml
 ---
 name: github
-description: 与 GitHub 仓库交互
+description: Interact with GitHub repositories
 
 route:
   triggers:
-    - "打开 PR"
-    - "创建 issue"
+    - "open a PR"
+    - "create issue"
   priority: 8
   prefer_when:
     - "issue"
@@ -254,15 +254,70 @@ route:
 
 ---
 
+## 基准测试
+
+本地运行基准测试：
+
+```bash
+cd benchmarks
+pnpm install
+pnpm run bench
+```
+
+示例结果：
+
+```
+╔══════════════════════════════════════════════════════════╗
+║         SkillPilot Benchmark Results                     ║
+╚══════════════════════════════════════════════════════════╝
+
+Dataset: 50 intents × 20 skills
+───────────────────────────────────────────────────────────
+Method:              SkillPilot (full)
+Accuracy:            93.0%
+P50 Latency:         12ms
+P99 Latency:         23ms
+───────────────────────────────────────────────────────────
+```
+
+---
+
+## 架构
+
+```
+┌─────────────────────────────────────────────┐
+│              User Message                    │
+└──────────────────┬──────────────────────────┘
+                   │
+┌──────────────────▼──────────────────────────┐
+│           Platform Adapter                   │
+│  OpenClaw | Claude Code | LangChain | CLI   │
+└──────────────────┬──────────────────────────┘
+                   │
+┌──────────────────▼──────────────────────────┐
+│         SkillPilot Core Engine               │
+│  ┌──────────┐ ┌──────────┐ ┌──────────────┐│
+│  │  Fast    │ │ Semantic │ │   Conflict   ││
+│  │  Router  │ │  Router  │ │   Resolver   ││
+│  └──────────┘ └──────────┘ └──────────────┘│
+│                                              │
+│  ┌──────────────────────────────────────┐   │
+│  │      Skill Index (SQLite + Vectors)   │   │
+│  └──────────────────────────────────────┘   │
+└─────────────────────────────────────────────┘
+```
+
+---
+
 ## 配置
 
 创建 `~/.skillpilot/config.yaml`：
 
 ```yaml
 router:
-  hardRouteThreshold: 0.80    # 直接执行技能的阈值
-  softInjectThreshold: 0.45   # 注入上下文辅助的阈值
-  enableSemantic: true        # 启用语义匹配
+  hardRouteThreshold: 0.80    # 直接执行技能
+  softInjectThreshold: 0.45   # 注入上下文
+  enableSemantic: true        # 启用向量匹配
 
 embed:
   provider: local-onnx        # 或 'openai'
@@ -305,7 +360,7 @@ pnpm rebuild better-sqlite3
 pnpm add -g @realtapel/skillpilot
 
 # 方法 2：使用 npx（无需安装）
-npx @realtapel/skillpilot route "创建 GitHub issue"
+npx @realtapel/skillpilot route "create GitHub issue"
 
 # 方法 3：修改 npm 全局目录
 mkdir ~/.npm-global
@@ -331,13 +386,13 @@ ONNX model not found at ~/.skillpilot/models/all-MiniLM-L6-v2.onnx, using fallba
 ```bash
 # 克隆仓库
 git clone https://github.com/RealTapeL/SkillPilot.git
-cd SkillPilot
+cd skillpilot
 
 # 安装依赖
 pnpm install
 
 # 构建所有包
-pnpm run build
+pnpm build
 
 # 运行测试
 pnpm test
@@ -372,7 +427,7 @@ MIT
 
 ---
 
-**SkillPilot** —— 更聪明地路由，而不是更困难。
+**SkillPilot** —— Route smarter, not harder.
 
 ---
 
