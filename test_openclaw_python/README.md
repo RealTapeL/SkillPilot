@@ -2,6 +2,18 @@
 
 这个 Python 测试项目用于测试 SkillPilot 在 OpenClaw 环境中的表现。
 
+📖 **详细示例文档**: [examples.md](./examples.md)  
+🌐 **项目主页**: [English](../README.md) | [中文](../README_zh.md)
+
+## 快速开始
+
+```bash
+pip install -r requirements.txt
+python test_skillpilot.py      # 功能测试
+python openclaw_mock.py        # OpenClaw 模拟
+python benchmark.py            # 性能测试
+```
+
 ## 项目结构
 
 ```

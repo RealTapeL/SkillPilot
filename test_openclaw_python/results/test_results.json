@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-04-05 11:10:06",
+  "timestamp": "2026-04-05 11:10:47",
   "results": [
     {
       "query": "create issue",
       "skill": "github",
       "confidence": 1,
       "method": "fast",
-      "latency_ms": 1.0202189999999973,
+      "latency_ms": 1.0273480000000177,
       "success": true,
       "error": null
     },
@@ -15,7 +15,7 @@
       "skill": "github",
       "confidence": 1,
       "method": "fast",
-      "latency_ms": 1.0338860000000238,
+      "latency_ms": 1.818493999999987,
       "success": true,
       "error": null
     },
@@ -24,7 +24,7 @@
       "skill": "github",
       "confidence": 1,
       "method": "fast",
-      "latency_ms": 1.0384039999999857,
+      "latency_ms": 1.0177750000000003,
       "success": true,
       "error": null
     },
@@ -33,7 +33,7 @@
       "skill": "github",
       "confidence": 1,
       "method": "fast",
-      "latency_ms": 0.999904000000015,
+      "latency_ms": 1.0238310000000013,
       "success": true,
       "error": null
     },
@@ -42,7 +42,7 @@
       "skill": "github",
       "confidence": 1,
       "method": "fast",
-      "latency_ms": 1.0124230000000125,
+      "latency_ms": 1.0174969999999917,
       "success": true,
       "error": null
     },
@@ -51,7 +51,7 @@
       "skill": "github",
       "confidence": 1,
       "method": "fast",
-      "latency_ms": 1.0004790000000128,
+      "latency_ms": 2.273142000000007,
       "success": true,
       "error": null
     },
@@ -60,7 +60,7 @@
       "skill": "github",
       "confidence": 1,
       "method": "fast",
-      "latency_ms": 1.020497000000006,
+      "latency_ms": 1.028219000000007,
       "success": true,
       "error": null
     },
@@ -69,7 +69,7 @@
       "skill": "github",
       "confidence": 1,
       "method": "fast",
-      "latency_ms": 0.9890519999999867,
+      "latency_ms": 1.0281820000000153,
       "success": true,
       "error": null
     },
@@ -78,7 +78,7 @@
       "skill": "slack",
       "confidence": 1,
       "method": "fast",
-      "latency_ms": 1.051997,
+      "latency_ms": 1.0120339999999999,
       "success": true,
       "error": null
     },
@@ -87,7 +87,7 @@
       "skill": "slack",
       "confidence": 1,
       "method": "fast",
-      "latency_ms": 0.9783299999999997,
+      "latency_ms": 1.0095900000000029,
       "success": true,
       "error": null
     },
@@ -96,7 +96,7 @@
       "skill": "slack",
       "confidence": 1,
       "method": "fast",
-      "latency_ms": 1.009904000000006,
+      "latency_ms": 0.9947750000000042,
       "success": true,
       "error": null
     },
@@ -105,7 +105,7 @@
       "skill": "slack",
       "confidence": 1,
       "method": "fast",
-      "latency_ms": 1.0584969999999885,
+      "latency_ms": 1.0168859999999995,
       "success": true,
       "error": null
     },
@@ -114,7 +114,7 @@
       "skill": null,
       "confidence": 0,
       "method": "no-match",
-      "latency_ms": 3.693729999999988,
+      "latency_ms": 3.4301379999999995,
       "success": true,
       "error": null
     },
@@ -123,7 +123,7 @@
       "skill": "file-read",
       "confidence": 1,
       "method": "fast",
-      "latency_ms": 1.0183300000000202,
+      "latency_ms": 1.0234789999999805,
       "success": true,
       "error": null
     },
@@ -132,7 +132,7 @@
       "skill": "file-read",
       "confidence": 1,
       "method": "fast",
-      "latency_ms": 1.0157009999999786,
+      "latency_ms": 1.0193859999999972,
       "success": true,
       "error": null
     },
@@ -141,7 +141,7 @@
       "skill": "file-write",
       "confidence": 1,
       "method": "fast",
-      "latency_ms": 1.0528119999999888,
+      "latency_ms": 1.0571079999999995,
       "success": true,
       "error": null
     },
@@ -150,7 +150,7 @@
       "skill": "file-write",
       "confidence": 1,
       "method": "fast",
-      "latency_ms": 1.01571899999999,
+      "latency_ms": 0.9891819999999996,
       "success": true,
       "error": null
     },
@@ -159,7 +159,7 @@
       "skill": null,
       "confidence": 0,
       "method": "no-match",
-      "latency_ms": 3.432693999999998,
+      "latency_ms": 3.5358970000000056,
       "success": true,
       "error": null
     },
@@ -168,7 +168,7 @@
       "skill": null,
       "confidence": 0,
       "method": "no-match",
-      "latency_ms": 3.4077120000000036,
+      "latency_ms": 3.550971000000004,
       "success": true,
       "error": null
     },
@@ -177,7 +177,7 @@
       "skill": "docker",
       "confidence": 1,
       "method": "fast",
-      "latency_ms": 1.0085709999999892,
+      "latency_ms": 1.024107999999984,
       "success": true,
       "error": null
     },
@@ -186,7 +186,7 @@
       "skill": "docker",
       "confidence": 1,
       "method": "fast",
-      "latency_ms": 1.0312749999999937,
+      "latency_ms": 1.0141260000000045,
       "success": true,
       "error": null
     },
@@ -195,7 +195,7 @@
       "skill": "docker",
       "confidence": 1,
       "method": "fast",
-      "latency_ms": 1.0196090000000027,
+      "latency_ms": 0.9902570000000139,
       "success": true,
       "error": null
     },
@@ -204,7 +204,7 @@
       "skill": "docker",
       "confidence": 1,
       "method": "fast",
-      "latency_ms": 1.0181079999999838,
+      "latency_ms": 1.0081449999999847,
       "success": true,
       "error": null
     }

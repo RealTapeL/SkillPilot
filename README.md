@@ -8,6 +8,8 @@
 
 **Your agent has 1,000 skills. SkillPilot makes sure it uses the right one.**
 
+🌐 [中文文档](./README_zh.md) | [Python Test Examples](./test_openclaw_python/examples.md)
+
 ---
 
 ## The Problem

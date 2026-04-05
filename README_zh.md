@@ -8,6 +8,8 @@
 
 **你的 Agent 有 1000 个技能，SkillPilot 确保它使用正确的那一个。**
 
+🌐 [English](./README.md) | [Python 测试示例](./test_openclaw_python/examples.md)
+
 ---
 
 ## 问题所在
