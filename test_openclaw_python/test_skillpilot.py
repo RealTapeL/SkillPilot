@@ -9,12 +9,23 @@ import subprocess
 import json
 import time
 import os
+import sys
+import webbrowser
+import threading
 from pathlib import Path
 from dataclasses import dataclass
 from typing import Optional, Dict, List, Any
 from rich.console import Console
 from rich.table import Table
 from rich.progress import Progress, TaskID
+from rich.panel import Panel
+
+# Web server imports
+try:
+    from http.server import HTTPServer, SimpleHTTPRequestHandler
+except ImportError:
+    from BaseHTTPServer import HTTPServer
+    from SimpleHTTPServer import SimpleHTTPRequestHandler
 
 console = Console()
 
@@ -351,6 +362,65 @@ TEST_CASES = [
 ]
 
 
+def start_web_server(port: int = 8080):
+    """启动 HTTP 服务器并在浏览器中打开 dashboard"""
+    dashboard_path = Path(__file__).parent / "dashboard.html"
+    
+    if not dashboard_path.exists():
+        console.print("[yellow]⚠ dashboard.html not found, skipping web interface[/yellow]")
+        return
+    
+    # 创建服务器
+    os.chdir(Path(__file__).parent)
+    
+    class DashboardHandler(SimpleHTTPRequestHandler):
+        def log_message(self, format, *args):
+            # 简化日志输出
+            pass
+    
+    try:
+        server = HTTPServer(('localhost', port), DashboardHandler)
+        
+        # 在后台线程启动服务器
+        def serve():
+            try:
+                server.serve_forever()
+            except Exception:
+                pass
+        
+        thread = threading.Thread(target=serve, daemon=True)
+        thread.start()
+        
+        # 构建 URL
+        url = f"http://localhost:{port}/dashboard.html"
+        
+        console.print(Panel(
+            f"[bold green]🌐 Web Dashboard Started![/bold green]\n\n"
+            f"[cyan]URL:[/cyan] {url}\n"
+            f"[dim]按 Ctrl+C 停止服务器[/dim]",
+            title="Web Interface",
+            border_style="green"
+        ))
+        
+        # 尝试自动打开浏览器
+        time.sleep(0.5)  # 等待服务器启动
+        try:
+            webbrowser.open(url)
+            console.print("[dim]✓ 浏览器已自动打开[/dim]")
+        except Exception:
+            console.print(f"[dim]请手动访问: {url}[/dim]")
+        
+        return server
+        
+    except OSError as e:
+        if "Address already in use" in str(e):
+            console.print(f"[yellow]⚠ 端口 {port} 已被占用，尝试其他端口...[/yellow]")
+            return start_web_server(port + 1)
+        else:
+            console.print(f"[red]✗ 无法启动 web 服务器: {e}[/red]")
+            return None
+
+
 def main():
     """主函数"""
     console.print("[bold cyan]" + "=" * 60)
@@ -379,6 +449,19 @@ def main():
     
     # 保存结果
     tester.save_results()
+    
+    # 启动 web 服务器
+    console.print("\n[dim]启动 web 界面...[/dim]")
+    server = start_web_server(port=8080)
+    
+    if server:
+        console.print("\n[dim]服务器运行中，按 Ctrl+C 停止...[/dim]")
+        try:
+            while True:
+                time.sleep(1)
+        except KeyboardInterrupt:
+            console.print("\n[yellow]停止服务器...[/yellow]")
+            server.shutdown()
     
     # 返回退出码
     return 0 if stats["accuracy"] >= 70 else 1
