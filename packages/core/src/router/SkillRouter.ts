@@ -24,9 +24,9 @@ export interface RouterConfig {
 }
 
 export const DEFAULT_ROUTER_CONFIG: RouterConfig = {
-  fastRouteMinScore: 8,
-  hardRouteThreshold: 0.80,
-  softInjectThreshold: 0.45,
+  fastRouteMinScore: 6,  // Lowered from 8 to catch more fuzzy matches
+  hardRouteThreshold: 0.70,  // Lowered for better coverage
+  softInjectThreshold: 0.40,
   enableSemantic: true
 };
 
@@ -80,20 +80,31 @@ export class SkillRouter {
     const trace: RouteTrace = {};
 
     // Stage 1: Fast Path (keyword + manual trigger matching)
-    const fastResult = this.fastRouter.match(query, fingerprints, this.config.fastRouteMinScore);
+    // Try with lower threshold to get potential fallback
+    const fastResult = this.fastRouter.match(query, fingerprints, 4);
     
-    if (fastResult && fastResult.score >= this.config.fastRouteMinScore) {
-      const resolved = await this.conflictResolver.resolve(fastResult.skill, query, fingerprints);
-      
-      if (context?.trace) {
-        trace.fastResult = {
-          score: fastResult.score,
-          matchedTrigger: fastResult.matchedTrigger,
-          matchedKeywords: fastResult.matchedKeywords
-        };
-      }
+    if (fastResult) {
+      // High confidence fast match - use immediately
+      if (fastResult.score >= this.config.fastRouteMinScore) {
+        const resolved = await this.conflictResolver.resolve(fastResult.skill, query, fingerprints);
+        
+        if (context?.trace) {
+          trace.fastResult = {
+            score: fastResult.score,
+            matchedTrigger: fastResult.matchedTrigger,
+            matchedKeywords: fastResult.matchedKeywords
+          };
+        }
 
-      return this.buildResult(resolved, 'fast', t0, trace);
+        return this.buildResult(resolved, 'fast', t0, trace);
+      }
+      
+      // Low confidence match - save for potential fallback
+      trace.fastResult = {
+        score: fastResult.score,
+        matchedTrigger: fastResult.matchedTrigger,
+        matchedKeywords: fastResult.matchedKeywords
+      };
     }
 
     // Stage 2: Slow Path (semantic embedding matching)
@@ -110,6 +121,18 @@ export class SkillRouter {
     const semResult = await this.semanticRouter.match(query, fingerprints);
     
     if (!semResult) {
+      // Fallback to low-confidence fast match if available
+      if (fastResult && fastResult.score >= 4) {
+        const fallbackConfidence = fastResult.score / 10;
+        return {
+          skill: fastResult.skill,
+          confidence: fallbackConfidence,
+          method: 'fast',
+          latencyMs: performance.now() - t0,
+          trace: context?.trace ? trace : undefined
+        };
+      }
+      
       return {
         skill: null,
         confidence: 0,

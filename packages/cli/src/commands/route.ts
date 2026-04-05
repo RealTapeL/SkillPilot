@@ -37,7 +37,13 @@ export function registerRouteCommand(program: Command): void {
           process.exit(1);
         }
 
-        const router = new SkillRouter(index, embed, DEFAULT_ROUTER_CONFIG);
+        const config = getConfig();
+        const router = new SkillRouter(index, embed, {
+          hardRouteThreshold: config.router.hardRouteThreshold,
+          softInjectThreshold: config.router.softInjectThreshold,
+          enableSemantic: config.router.enableSemantic,
+          fastRouteMinScore: config.router.fastRouteMinScore
+        });
         const result = await router.route(query);
 
         if (options.json) {

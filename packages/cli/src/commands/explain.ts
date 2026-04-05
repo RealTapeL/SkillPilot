@@ -12,7 +12,7 @@ import {
   LocalEmbedProvider,
   DEFAULT_ROUTER_CONFIG
 } from '@realtapel/skillpilot-core';
-import { getDataDir } from '../config.js';
+import { getDataDir, getConfig } from '../config.js';
 import { Formatter } from '../output/Formatter.js';
 
 export function registerExplainCommand(program: Command): void {
@@ -35,7 +35,13 @@ export function registerExplainCommand(program: Command): void {
           process.exit(1);
         }
 
-        const router = new SkillRouter(index, embed, DEFAULT_ROUTER_CONFIG);
+        const config = getConfig();
+        const router = new SkillRouter(index, embed, {
+          hardRouteThreshold: config.router.hardRouteThreshold,
+          softInjectThreshold: config.router.softInjectThreshold,
+          enableSemantic: config.router.enableSemantic,
+          fastRouteMinScore: config.router.fastRouteMinScore
+        });
         
         // Route with trace enabled
         const result = await router.route(query, { trace: true });

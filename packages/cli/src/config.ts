@@ -9,9 +9,10 @@ import { z } from 'zod';
 
 const configSchema = z.object({
   router: z.object({
-    hardRouteThreshold: z.number().min(0).max(1).default(0.80),
-    softInjectThreshold: z.number().min(0).max(1).default(0.45),
+    hardRouteThreshold: z.number().min(0).max(1).default(0.70),
+    softInjectThreshold: z.number().min(0).max(1).default(0.40),
     enableSemantic: z.boolean().default(true),
+    fastRouteMinScore: z.number().min(0).max(10).default(6),
     debug: z.boolean().default(false)
   }).default({}),
   embed: z.object({
