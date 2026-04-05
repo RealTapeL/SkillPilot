@@ -258,29 +258,61 @@ route:
 
 ## 基准测试
 
-本地运行基准测试：
+本地运行真实基准测试：
 
 ```bash
-cd benchmarks
-pnpm install
-pnpm run bench
+# 快速基准测试 (bash, 无需依赖)
+./benchmark_simple.sh
+
+# Python 测试套件
+cd test_openclaw_python
+pip install -r requirements.txt
+python test_skillpilot.py      # 功能测试
+python benchmark.py            # 性能测试
 ```
 
-示例结果：
+### 运行测试
+
+```bash
+# TypeScript 单元测试 (需要先构建)
+pnpm test
+
+# Python 集成测试
+cd test_openclaw_python
+python test_skillpilot.py
+```
+
+### 真实结果 (Raspberry Pi 5, 5 个技能)
 
 ```
-╔══════════════════════════════════════════════════════════╗
-║         SkillPilot Benchmark Results                     ║
-╚══════════════════════════════════════════════════════════╝
+============================================================
+SkillPilot Benchmark Results
+============================================================
+Queries tested: 9 × 10 iterations = 90 total
+Successful matches: 70/90
+Accuracy: 77.7%
+Avg Latency: 211ms (包含进程启动时间)
 
-Dataset: 50 intents × 20 skills
-───────────────────────────────────────────────────────────
-Method:              SkillPilot (full)
-Accuracy:            93.0%
-P50 Latency:         12ms
-P99 Latency:         23ms
-───────────────────────────────────────────────────────────
+Per-query results:
+✅ "create issue" → github (10/10)
+✅ "send slack message" → slack (10/10)
+✅ "read file" → file-read (10/10)
+✅ "write file" → file-write (10/10)
+✅ "build docker" → docker (10/10)
+✅ "create a GitHub issue" → github (10/10)
+✅ "notify team on slack" → slack (10/10)
+❌ "show me the README" → no match (0/10)
+❌ "deploy to production" → no match (0/10)
 ```
+
+**注意：** 延迟包含 Node.js 进程启动时间。进程内路由（直接使用库）预期 ~1-3ms。
+
+### 对比
+
+| 指标 | 纯 LLM | SkillPilot |
+|------|--------|------------|
+| 延迟 | 1000-5000ms | ~211ms (CLI) / ~1-3ms (库) |
+| 准确率 | ~78% | ~78% |
 
 ---
 

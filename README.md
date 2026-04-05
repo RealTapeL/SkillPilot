@@ -261,10 +261,26 @@ route:
 Run real benchmarks locally:
 
 ```bash
-# Quick benchmark
+# Quick benchmark (bash, no dependencies)
 ./benchmark_simple.sh
 
-# Or use the Python test suite
+# Python test suite
+cd test_openclaw_python
+pip install -r requirements.txt
+python test_skillpilot.py      # 功能测试
+python benchmark.py            # 性能测试
+
+# OpenClaw 模拟测试
+python openclaw_mock.py
+```
+
+### Running Tests
+
+```bash
+# TypeScript unit tests (requires build)
+pnpm test
+
+# Python integration tests
 cd test_openclaw_python
 python test_skillpilot.py
 ```
