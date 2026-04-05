@@ -7,6 +7,15 @@
 
 ---
 
+> **⚠️ 重要说明**：本文档包含**设计目标**（规划中）和**实际结果**（已实现）。
+> 
+> - ✅ **已实现**：见下方 "实际测试结果" 章节
+> - 🎯 **设计目标**：见 "Benchmark 方案" 章节（标记为 TODO）
+> 
+> 当前实际结果：**89.7% 准确率** (10 skills × 58 test cases)，详见 [README](./README.md)
+
+---
+
 ## 目录
 
 1. [项目定位](#一项目定位)
@@ -780,28 +789,64 @@ benchmarks/datasets/
 
 测试集从 ClawHub 上最受欢迎的 50 个 skill 中采样，100 条 intent 由社区贡献标注（可在 README 中发起 "Help us label" 号召，本身就是一种社区参与方式）。
 
-### 9.3 运行 Benchmark
+### 9.3 实际测试结果 (Real Results)
+
+**当前实现状态**（Raspberry Pi 5，实际运行）：
+
+```
+============================================================
+SkillPilot Test Results
+============================================================
+Dataset: 10 skills × 58 test cases  ✅ 已实现
+Total Tests: 58
+Correct: 52
+Accuracy: 89.7%                     ✅ 实际达成
+Avg Latency: ~4ms (library)         ✅ 实际达成
+             ~200ms (CLI with Node startup)
+```
+
+**测试覆盖**：
+- 10 skills: github, git, slack, file-read, file-write, docker, npm, python, aws, database
+- 58 test cases: 精确触发、语义匹配、模糊查询
+
+运行测试：
+```bash
+cd test_openclaw_python
+python test_skillpilot.py
+```
+
+---
+
+### 9.4 设计目标 (TODO)
+
+**目标 benchmark**（待实现）：
 
 ```bash
+# TODO: 需要扩展到 50 skills × 100 intents
+# TODO: 需要 ONNX 模型支持完整语义匹配
+
 cd benchmarks
 pnpm run bench
 
-# 输出：
+# 目标输出：
 # SkillPilot Benchmark Results
 # ─────────────────────────────────────────────
-# Dataset: 100 intents × 50 skills
+# Dataset: 100 intents × 50 skills     🎯 目标
 # ─────────────────────────────────────────────
 # Method              Accuracy   P50 lat   P99 lat
 # ─────────────────────────────────────────────
 # LLM (gpt-4o)         78.0%    1840ms    4200ms
 # Keyword only          61.0%       2ms       4ms
 # SkillPilot (fast)     84.0%       2ms       4ms
-# SkillPilot (full)     93.0%      12ms      23ms  ← recommended
+# SkillPilot (full)     93.0%      12ms      23ms  🎯 目标
 # ─────────────────────────────────────────────
-# Conflict resolution accuracy: 87%
+# Conflict resolution accuracy: 87%    🎯 目标
 ```
 
-CI 自动运行 benchmark，结果提交到 `benchmarks/results/latest.json`，README 徽章实时更新。
+**当前限制**：
+- 测试集规模：实际 10 skills vs 目标 50 skills
+- 准确率：实际 89.7% vs 目标 93%
+- ONNX 语义模型：尚未集成（使用 fallback embedding）
 
 ---
 
