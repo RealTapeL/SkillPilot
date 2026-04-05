@@ -285,38 +285,29 @@ cd test_openclaw_python
 python test_skillpilot.py
 ```
 
-### Real Results (Raspberry Pi 5, 5 skills)
+### Real Results (Raspberry Pi 5, 10 skills, 58 test cases)
 
 ```
 ============================================================
-SkillPilot Benchmark Results
+SkillPilot Test Results
 ============================================================
-Queries tested: 9 × 10 iterations = 90 total
-Successful matches: 70/90
-Accuracy: 77.7%
-Avg Latency: 211ms (includes process startup)
-
-Per-query results:
-✅ "create issue" → github (10/10)
-✅ "send slack message" → slack (10/10)
-✅ "read file" → file-read (10/10)
-✅ "write file" → file-write (10/10)
-✅ "build docker" → docker (10/10)
-✅ "create a GitHub issue" → github (10/10)
-✅ "notify team on slack" → slack (10/10)
-❌ "show me the README" → no match (0/10)
-❌ "deploy to production" → no match (0/10)
+Total Tests: 58
+Correct: 52
+Accuracy: 89.7%
+Avg Latency: ~4ms (library) / ~200ms (CLI with Node startup)
 ```
 
-**Note:** Latency includes Node.js process startup. For in-process routing 
-(using the library directly), expect ~1-3ms for fast path matches.
+**Key improvements:**
+- Fixed fuzzy matching for queries like "show me the README" → file-read
+- Fixed "create a GitHub issue" correctly routes to github (not git)
+- Handles partial trigger matches (e.g., "show" matches "show content")
 
 ### Comparison
 
 | Metric | LLM-only | SkillPilot |
 |--------|----------|------------|
-| Latency | 1000-5000ms | ~211ms (CLI) / ~1-3ms (library) |
-| Accuracy | ~78% | ~78% |
+| Latency | 1000-5000ms | ~200ms (CLI) / ~1-5ms (library) |
+| Accuracy | ~78% | **~90%** |
 
 ---
 

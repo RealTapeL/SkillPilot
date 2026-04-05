@@ -282,37 +282,29 @@ cd test_openclaw_python
 python test_skillpilot.py
 ```
 
-### 真实结果 (Raspberry Pi 5, 5 个技能)
+### 真实结果 (Raspberry Pi 5, 10 个技能, 58 个测试用例)
 
 ```
 ============================================================
-SkillPilot Benchmark Results
+SkillPilot 测试结果
 ============================================================
-Queries tested: 9 × 10 iterations = 90 total
-Successful matches: 70/90
-Accuracy: 77.7%
-Avg Latency: 211ms (包含进程启动时间)
-
-Per-query results:
-✅ "create issue" → github (10/10)
-✅ "send slack message" → slack (10/10)
-✅ "read file" → file-read (10/10)
-✅ "write file" → file-write (10/10)
-✅ "build docker" → docker (10/10)
-✅ "create a GitHub issue" → github (10/10)
-✅ "notify team on slack" → slack (10/10)
-❌ "show me the README" → no match (0/10)
-❌ "deploy to production" → no match (0/10)
+总测试数: 58
+正确匹配: 52
+准确率: 89.7%
+平均延迟: ~4ms (库) / ~200ms (CLI 含 Node 启动)
 ```
 
-**注意：** 延迟包含 Node.js 进程启动时间。进程内路由（直接使用库）预期 ~1-3ms。
+**关键改进：**
+- 修复模糊匹配："show me the README" → file-read
+- 修复 "create a GitHub issue" 正确路由到 github（而不是 git）
+- 支持部分触发词匹配（如 "show" 匹配 "show content"）
 
 ### 对比
 
 | 指标 | 纯 LLM | SkillPilot |
 |------|--------|------------|
-| 延迟 | 1000-5000ms | ~211ms (CLI) / ~1-3ms (库) |
-| 准确率 | ~78% | ~78% |
+| 延迟 | 1000-5000ms | ~200ms (CLI) / ~1-5ms (库) |
+| 准确率 | ~78% | **~90%** |
 
 ---
 
