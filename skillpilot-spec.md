@@ -199,7 +199,7 @@ skillpilot/
 │   │   │   │   ├── FastRouter.ts      # 关键词/触发短语快速匹配
 │   │   │   │   ├── SemanticRouter.ts  # 向量语义匹配
 │   │   │   │   ├── ConflictResolver.ts # 冲突感知二次筛选
-│   │   │   │   └── SkillPilotr.ts     # 总调度，组合三个路由器
+│   │   │   │   └── SkillRouter.ts     # 总调度，组合三个路由器
 │   │   │   ├── index/
 │   │   │   │   ├── SkillIndex.ts      # SQLite + 向量索引管理
 │   │   │   │   ├── IndexBuilder.ts    # 从 skill 目录构建索引
@@ -418,10 +418,10 @@ export class ConflictDetector {
 }
 ```
 
-### 5.3 SkillPilotr — 三阶段路由
+### 5.3 SkillRouter — 三阶段路由
 
 ```typescript
-// packages/core/src/router/SkillPilotr.ts
+// packages/core/src/router/SkillRouter.ts
 
 export interface RouteResult {
   skill: SkillFingerprint | null;
@@ -433,7 +433,7 @@ export interface RouteResult {
   trace?: RouteTrace;               // debug 模式下填充
 }
 
-export class SkillPilotr {
+export class SkillRouter {
   constructor(
     private index: SkillIndex,
     private fastRouter: FastRouter,
@@ -543,7 +543,7 @@ type AdapterAction =
 ```typescript
 // packages/openclaw/src/OpenClawAdapter.ts
 import { definePluginEntry } from 'openclaw/plugin-sdk';
-import { SkillPilotr, SkillIndex } from '@skillpilot/core';
+import { SkillRouter, SkillIndex } from '@skillpilot/core';
 
 export default definePluginEntry({
   id: 'skillpilot',
@@ -551,7 +551,7 @@ export default definePluginEntry({
 
   async register(api) {
     const index = await SkillIndex.load('~/.openclaw/skills');
-    const router = new SkillPilotr(index, api.config);
+    const router = new SkillRouter(index, api.config);
 
     api.registerHook('before_dispatch', async (ctx) => {
       const result = await router.route(ctx.message.text);
@@ -607,14 +607,14 @@ export default definePluginEntry({
 ```typescript
 // packages/claude-code/src/ClaudeCodeAdapter.ts
 // Claude Code 通过 CLAUDE.md 中的 hook 配置调用此脚本
-import { SkillPilotr, SkillIndex } from '@skillpilot/core';
+import { SkillRouter, SkillIndex } from '@skillpilot/core';
 
 async function main() {
   const query = process.argv[2];
   const skillDir = process.env.SKILLROUTE_SKILL_DIR ?? '~/.claude/skills';
 
   const index = await SkillIndex.load(skillDir);
-  const router = new SkillPilotr(index, loadConfig());
+  const router = new SkillRouter(index, loadConfig());
   const result = await router.route(query);
 
   // 输出 JSON，由 Claude Code hook 解析并注入 system context
@@ -639,13 +639,13 @@ If output is non-empty, use that skill to answer the user.
 ```typescript
 // packages/langchain/src/LangChainAdapter.ts
 import { BaseTool } from 'langchain/tools';
-import { SkillPilotr, SkillIndex } from '@skillpilot/core';
+import { SkillRouter, SkillIndex } from '@skillpilot/core';
 
 export class SkillPilotTool extends BaseTool {
   name = 'skill_router';
   description = 'Routes user intent to the most appropriate installed skill';
 
-  private router: SkillPilotr;
+  private router: SkillRouter;
 
   async _call(query: string): Promise<string> {
     const result = await this.router.route(query);
@@ -1021,13 +1021,13 @@ platforms:
 ## 附录 A：核心 API 速查
 
 ```typescript
-import { SkillIndex, SkillPilotr } from '@skillpilot/core';
+import { SkillIndex, SkillRouter } from '@skillpilot/core';
 
 // 建立索引
 const index = await SkillIndex.load('~/.openclaw/skills');
 
 // 路由
-const router = new SkillPilotr(index);
+const router = new SkillRouter(index);
 const result = await router.route('create a github issue');
 // → { skill: { name: 'github', ... }, confidence: 0.94, method: 'semantic', latencyMs: 18 }
 
