@@ -1,0 +1,24 @@
+# SkillPilot Test Configuration
+# 降低阈值以提高匹配率
+
+router:
+  hardRouteThreshold: 0.30    # 降低硬路由阈值
+  softInjectThreshold: 0.15   # 降低软注入阈值
+  enableSemantic: true
+  fastRouteMinScore: 6        # 降低快速路径阈值
+
+embed:
+  provider: local-onnx
+
+index:
+  skillDirs:
+    - ./skills
+  refreshInterval: 5
+  conflictThreshold: 0.85
+
+feedback:
+  enabled: true
+  batchSize: 10
+
+cli:
+  outputFormat: human

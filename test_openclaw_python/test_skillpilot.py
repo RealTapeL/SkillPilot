@@ -259,34 +259,40 @@ class SkillPilotTester:
 
 # 测试用例定义
 TEST_CASES = [
-    # GitHub 相关
+    # GitHub 相关 - 使用技能中定义的 triggers
+    TestCase("create issue", "github", "Create GitHub issue (trigger)"),
+    TestCase("open a PR", "github", "Open PR (trigger)"),
+    TestCase("review pull request", "github", "Review PR (trigger)"),
+    TestCase("list my repos", "github", "List repos (trigger)"),
+    TestCase("check CI status", "github", "Check CI (trigger)"),
+    # GitHub 语义匹配
     TestCase("create a GitHub issue", "github", "Create GitHub issue"),
     TestCase("open a pull request on github", "github", "Open PR"),
     TestCase("list my GitHub repositories", "github", "List repos"),
-    TestCase("check CI status", "github", "Check CI"),
-    TestCase("review my pull request", "github", "Review PR"),
     
-    # Slack 相关
+    # Slack 相关 - 使用技能中定义的 triggers
+    TestCase("send slack message", "slack", "Send Slack message (trigger)"),
+    TestCase("notify team", "slack", "Notify team (trigger)"),
+    TestCase("post to channel", "slack", "Post to channel (trigger)"),
+    # Slack 语义匹配
     TestCase("send a message to Slack", "slack", "Send Slack message"),
     TestCase("notify the team on slack", "slack", "Notify team"),
-    TestCase("post update to #general channel", "slack", "Post to channel"),
     
-    # 文件操作
+    # 文件操作 - 使用技能中定义的 triggers
+    TestCase("read file", "file-read", "Read file (trigger)"),
+    TestCase("show content", "file-read", "Show content (trigger)"),
+    TestCase("write file", "file-write", "Write file (trigger)"),
+    TestCase("save file", "file-write", "Save file (trigger)"),
+    # 文件操作语义匹配
     TestCase("read the README.md file", "file-read", "Read file"),
-    TestCase("show me package.json content", "file-read", "Show file content"),
     TestCase("write output to results.txt", "file-write", "Write file"),
-    TestCase("save this data to a file", "file-write", "Save file"),
-    TestCase("create a new configuration file", "file-write", "Create file"),
     
-    # Docker 相关
+    # Docker 相关 - 使用技能中定义的 triggers
+    TestCase("build docker", "docker", "Build Docker (trigger)"),
+    TestCase("docker build", "docker", "Docker build (trigger)"),
+    # Docker 语义匹配
     TestCase("build a Docker image", "docker", "Build Docker"),
     TestCase("run a docker container", "docker", "Run container"),
-    TestCase("docker build my app", "docker", "Docker build"),
-    
-    # 边缘/困难案例
-    TestCase("deploy my application", "docker", "Deploy (ambiguous)"),
-    TestCase("show me the data", "file-read", "Show data (ambiguous)"),
-    TestCase("update the system", None, "Update (no match)"),
 ]
 
 

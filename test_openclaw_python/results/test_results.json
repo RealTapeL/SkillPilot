@@ -1,0 +1,212 @@
+{
+  "timestamp": "2026-04-05 11:10:06",
+  "results": [
+    {
+      "query": "create issue",
+      "skill": "github",
+      "confidence": 1,
+      "method": "fast",
+      "latency_ms": 1.0202189999999973,
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "open a PR",
+      "skill": "github",
+      "confidence": 1,
+      "method": "fast",
+      "latency_ms": 1.0338860000000238,
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "review pull request",
+      "skill": "github",
+      "confidence": 1,
+      "method": "fast",
+      "latency_ms": 1.0384039999999857,
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "list my repos",
+      "skill": "github",
+      "confidence": 1,
+      "method": "fast",
+      "latency_ms": 0.999904000000015,
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "check CI status",
+      "skill": "github",
+      "confidence": 1,
+      "method": "fast",
+      "latency_ms": 1.0124230000000125,
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "create a GitHub issue",
+      "skill": "github",
+      "confidence": 1,
+      "method": "fast",
+      "latency_ms": 1.0004790000000128,
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "open a pull request on github",
+      "skill": "github",
+      "confidence": 1,
+      "method": "fast",
+      "latency_ms": 1.020497000000006,
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "list my GitHub repositories",
+      "skill": "github",
+      "confidence": 1,
+      "method": "fast",
+      "latency_ms": 0.9890519999999867,
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "send slack message",
+      "skill": "slack",
+      "confidence": 1,
+      "method": "fast",
+      "latency_ms": 1.051997,
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "notify team",
+      "skill": "slack",
+      "confidence": 1,
+      "method": "fast",
+      "latency_ms": 0.9783299999999997,
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "post to channel",
+      "skill": "slack",
+      "confidence": 1,
+      "method": "fast",
+      "latency_ms": 1.009904000000006,
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "send a message to Slack",
+      "skill": "slack",
+      "confidence": 1,
+      "method": "fast",
+      "latency_ms": 1.0584969999999885,
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "notify the team on slack",
+      "skill": null,
+      "confidence": 0,
+      "method": "no-match",
+      "latency_ms": 3.693729999999988,
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "read file",
+      "skill": "file-read",
+      "confidence": 1,
+      "method": "fast",
+      "latency_ms": 1.0183300000000202,
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "show content",
+      "skill": "file-read",
+      "confidence": 1,
+      "method": "fast",
+      "latency_ms": 1.0157009999999786,
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "write file",
+      "skill": "file-write",
+      "confidence": 1,
+      "method": "fast",
+      "latency_ms": 1.0528119999999888,
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "save file",
+      "skill": "file-write",
+      "confidence": 1,
+      "method": "fast",
+      "latency_ms": 1.01571899999999,
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "read the README.md file",
+      "skill": null,
+      "confidence": 0,
+      "method": "no-match",
+      "latency_ms": 3.432693999999998,
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "write output to results.txt",
+      "skill": null,
+      "confidence": 0,
+      "method": "no-match",
+      "latency_ms": 3.4077120000000036,
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "build docker",
+      "skill": "docker",
+      "confidence": 1,
+      "method": "fast",
+      "latency_ms": 1.0085709999999892,
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "docker build",
+      "skill": "docker",
+      "confidence": 1,
+      "method": "fast",
+      "latency_ms": 1.0312749999999937,
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "build a Docker image",
+      "skill": "docker",
+      "confidence": 1,
+      "method": "fast",
+      "latency_ms": 1.0196090000000027,
+      "success": true,
+      "error": null
+    },
+    {
+      "query": "run a docker container",
+      "skill": "docker",
+      "confidence": 1,
+      "method": "fast",
+      "latency_ms": 1.0181079999999838,
+      "success": true,
+      "error": null
+    }
+  ]
+}
