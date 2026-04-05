@@ -73,10 +73,11 @@ def run_latency_test(queries: List[str], cli_path: Path, iterations: int = 5) ->
                 all_latencies.append(elapsed_ms)
                 
                 if result:
+                    skill_data = result.get("skill") or {}
                     results.append(BenchmarkResult(
                         query=query,
                         latency_ms=elapsed_ms,
-                        skill=result.get("skill", {}).get("name", "None"),
+                        skill=skill_data.get("name", "None") if skill_data else "None",
                         confidence=result.get("confidence", 0),
                         method=result.get("method", "unknown")
                     ))

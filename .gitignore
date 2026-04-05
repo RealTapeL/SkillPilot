@@ -33,6 +33,25 @@ npm-debug.log*
 .env
 .env.local
 
-# SkillRoute data
+# SkillRoute/SkillPilot data
 .test-index/
 .skillroute/
+.skillpilot/
+
+# Python virtual environment
+test_openclaw_python/skillpilot/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+
+# Test outputs
+test_openclaw_python/results/
+benchmark_results.json
+
+# Temporary files
+*.tmp
+.temp/
