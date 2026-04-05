@@ -14,34 +14,6 @@ python openclaw_mock.py        # OpenClaw 模拟
 python benchmark.py            # 性能测试
 ```
 
-### Web 界面查看结果
-
-运行测试时会**自动启动 web 服务器**并打开浏览器：
-
-```bash
-python test_skillpilot.py
-# 测试完成后自动在 http://localhost:8080 启动 web 界面
-```
-
-**或者手动打开：**
-```bash
-# 方法1: 直接用浏览器打开
-open dashboard.html  # macOS
-xdg-open dashboard.html  # Linux
-
-# 方法2: 启动简单 HTTP 服务器
-python -m http.server 8080
-# 然后访问 http://localhost:8080/dashboard.html
-```
-
-**功能特性：**
-- 🚀 **自动启动**: 运行测试后自动在 localhost:8080 启动 web 服务器
-- 🌐 **自动打开浏览器**: 测试完成后自动打开 dashboard
-- 📊 实时展示准确率、延迟等关键指标
-- 📈 可视化进度条和统计卡片
-- 📋 详细测试结果表格（通过/失败状态）
-- 🔄 自动从 `results/test_results.json` 加载数据
-
 ## 项目结构
 
 ```
