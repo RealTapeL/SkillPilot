@@ -64,5 +64,24 @@ export {
   DEFAULT_FEEDBACK_CONFIG 
 } from './feedback/FeedbackRecorder.js';
 
+// Config
+export {
+  ConfigManager,
+  ModelManager,
+  DEFAULT_CONFIG,
+  CONFIG_PRESETS,
+  AVAILABLE_MODELS
+} from './config/index.js';
+
+export type {
+  SkillPilotConfig,
+  RouterConfig as FullRouterConfig,
+  EmbedConfig,
+  IndexConfig,
+  FeedbackConfig,
+  CliConfig,
+  ModelName
+} from './config/index.js';
+
 // Version
 export const VERSION = '0.1.0';
