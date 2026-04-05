@@ -1,0 +1,646 @@
+{
+  "timestamp": "2026-04-05 13:23:40",
+  "total_tests": 90,
+  "successful": 0,
+  "failed": 90,
+  "accuracy": 0.0,
+  "latency": {
+    "mean_ms": 0,
+    "median_ms": 0,
+    "min_ms": 0,
+    "max_ms": 0,
+    "p95_ms": 0
+  },
+  "results": [
+    {
+      "query": "create issue",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 203.65214301273227
+    },
+    {
+      "query": "create issue",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 201.2790950248018
+    },
+    {
+      "query": "create issue",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 202.4498500104528
+    },
+    {
+      "query": "create issue",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 249.51847700867802
+    },
+    {
+      "query": "create issue",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 221.67932498268783
+    },
+    {
+      "query": "create issue",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 205.2814149938058
+    },
+    {
+      "query": "create issue",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 209.60132800973952
+    },
+    {
+      "query": "create issue",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 209.22508699004538
+    },
+    {
+      "query": "create issue",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 219.95538601186126
+    },
+    {
+      "query": "create issue",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 211.38941400568
+    },
+    {
+      "query": "send slack message",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 206.94146599271335
+    },
+    {
+      "query": "send slack message",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 211.68915400630794
+    },
+    {
+      "query": "send slack message",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 216.956766002113
+    },
+    {
+      "query": "send slack message",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 207.72977799060754
+    },
+    {
+      "query": "send slack message",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 205.4325999924913
+    },
+    {
+      "query": "send slack message",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 209.96327002649195
+    },
+    {
+      "query": "send slack message",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 216.51334202033468
+    },
+    {
+      "query": "send slack message",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 219.89110900904052
+    },
+    {
+      "query": "send slack message",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 219.89181300159544
+    },
+    {
+      "query": "send slack message",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 208.152647013776
+    },
+    {
+      "query": "read file",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 207.0787980046589
+    },
+    {
+      "query": "read file",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 204.48704701266252
+    },
+    {
+      "query": "read file",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 203.52788400487043
+    },
+    {
+      "query": "read file",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 209.7117519879248
+    },
+    {
+      "query": "read file",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 200.7197070051916
+    },
+    {
+      "query": "read file",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 209.3802909948863
+    },
+    {
+      "query": "read file",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 211.61284000845626
+    },
+    {
+      "query": "read file",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 216.98515600292012
+    },
+    {
+      "query": "read file",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 225.30235099839047
+    },
+    {
+      "query": "read file",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 210.6549899908714
+    },
+    {
+      "query": "write file",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 202.91671899030916
+    },
+    {
+      "query": "write file",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 210.12641800916754
+    },
+    {
+      "query": "write file",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 220.87832700344734
+    },
+    {
+      "query": "write file",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 208.18955299910158
+    },
+    {
+      "query": "write file",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 207.1026310150046
+    },
+    {
+      "query": "write file",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 208.75692198751494
+    },
+    {
+      "query": "write file",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 225.69657198619097
+    },
+    {
+      "query": "write file",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 213.89561000978574
+    },
+    {
+      "query": "write file",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 201.22501999139786
+    },
+    {
+      "query": "write file",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 207.1007060003467
+    },
+    {
+      "query": "build docker",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 208.21690501179546
+    },
+    {
+      "query": "build docker",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 209.11406900268048
+    },
+    {
+      "query": "build docker",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 206.9686689937953
+    },
+    {
+      "query": "build docker",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 208.5283679771237
+    },
+    {
+      "query": "build docker",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 208.07499799411744
+    },
+    {
+      "query": "build docker",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 221.62799298530445
+    },
+    {
+      "query": "build docker",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 217.03993302071467
+    },
+    {
+      "query": "build docker",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 209.26066100946628
+    },
+    {
+      "query": "build docker",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 209.41684598801658
+    },
+    {
+      "query": "build docker",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 206.2862829770893
+    },
+    {
+      "query": "create a GitHub issue for the bug",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 226.54588299337775
+    },
+    {
+      "query": "create a GitHub issue for the bug",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 205.80889499979094
+    },
+    {
+      "query": "create a GitHub issue for the bug",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 201.54133401229046
+    },
+    {
+      "query": "create a GitHub issue for the bug",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 210.0855850148946
+    },
+    {
+      "query": "create a GitHub issue for the bug",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 209.5709939894732
+    },
+    {
+      "query": "create a GitHub issue for the bug",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 227.10101198754273
+    },
+    {
+      "query": "create a GitHub issue for the bug",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 210.02714001224376
+    },
+    {
+      "query": "create a GitHub issue for the bug",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 209.47321600397117
+    },
+    {
+      "query": "create a GitHub issue for the bug",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 208.79038501880132
+    },
+    {
+      "query": "create a GitHub issue for the bug",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 205.44789600535296
+    },
+    {
+      "query": "notify team on slack",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 204.6391399926506
+    },
+    {
+      "query": "notify team on slack",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 202.73255198844709
+    },
+    {
+      "query": "notify team on slack",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 220.29566299170256
+    },
+    {
+      "query": "notify team on slack",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 209.18419901863672
+    },
+    {
+      "query": "notify team on slack",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 208.43579299980775
+    },
+    {
+      "query": "notify team on slack",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 221.10077101388015
+    },
+    {
+      "query": "notify team on slack",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 203.3887169964146
+    },
+    {
+      "query": "notify team on slack",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 220.05290500237606
+    },
+    {
+      "query": "notify team on slack",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 221.23223400558345
+    },
+    {
+      "query": "notify team on slack",
+      "skill": null,
+      "confidence": 0,
+      "method": "error",
+      "latency_ms": 225.20940701360814
+    },
+    {
+      "query": "show me the README content",
+      "skill": null,
+      "confidence": 0,
+      "method": "no-match",
+      "latency_ms": 223.2815600000322
+    },
+    {
+      "query": "show me the README content",
+      "skill": null,
+      "confidence": 0,
+      "method": "no-match",
+      "latency_ms": 205.8551170048304
+    },
+    {
+      "query": "show me the README content",
+      "skill": null,
+      "confidence": 0,
+      "method": "no-match",
+      "latency_ms": 211.7007269989699
+    },
+    {
+      "query": "show me the README content",
+      "skill": null,
+      "confidence": 0,
+      "method": "no-match",
+      "latency_ms": 225.0906850094907
+    },
+    {
+      "query": "show me the README content",
+      "skill": null,
+      "confidence": 0,
+      "method": "no-match",
+      "latency_ms": 209.14860599441454
+    },
+    {
+      "query": "show me the README content",
+      "skill": null,
+      "confidence": 0,
+      "method": "no-match",
+      "latency_ms": 203.7065309996251
+    },
+    {
+      "query": "show me the README content",
+      "skill": null,
+      "confidence": 0,
+      "method": "no-match",
+      "latency_ms": 210.74010099982843
+    },
+    {
+      "query": "show me the README content",
+      "skill": null,
+      "confidence": 0,
+      "method": "no-match",
+      "latency_ms": 223.51544900448062
+    },
+    {
+      "query": "show me the README content",
+      "skill": null,
+      "confidence": 0,
+      "method": "no-match",
+      "latency_ms": 218.13161397585645
+    },
+    {
+      "query": "show me the README content",
+      "skill": null,
+      "confidence": 0,
+      "method": "no-match",
+      "latency_ms": 208.75175500987098
+    },
+    {
+      "query": "deploy to production",
+      "skill": null,
+      "confidence": 0,
+      "method": "no-match",
+      "latency_ms": 205.63617299194448
+    },
+    {
+      "query": "deploy to production",
+      "skill": null,
+      "confidence": 0,
+      "method": "no-match",
+      "latency_ms": 209.7151420020964
+    },
+    {
+      "query": "deploy to production",
+      "skill": null,
+      "confidence": 0,
+      "method": "no-match",
+      "latency_ms": 210.51330599584617
+    },
+    {
+      "query": "deploy to production",
+      "skill": null,
+      "confidence": 0,
+      "method": "no-match",
+      "latency_ms": 217.60787500534207
+    },
+    {
+      "query": "deploy to production",
+      "skill": null,
+      "confidence": 0,
+      "method": "no-match",
+      "latency_ms": 204.27599200047553
+    },
+    {
+      "query": "deploy to production",
+      "skill": null,
+      "confidence": 0,
+      "method": "no-match",
+      "latency_ms": 209.94873298332095
+    },
+    {
+      "query": "deploy to production",
+      "skill": null,
+      "confidence": 0,
+      "method": "no-match",
+      "latency_ms": 209.7117709927261
+    },
+    {
+      "query": "deploy to production",
+      "skill": null,
+      "confidence": 0,
+      "method": "no-match",
+      "latency_ms": 220.63847599201836
+    },
+    {
+      "query": "deploy to production",
+      "skill": null,
+      "confidence": 0,
+      "method": "no-match",
+      "latency_ms": 207.65894500073045
+    },
+    {
+      "query": "deploy to production",
+      "skill": null,
+      "confidence": 0,
+      "method": "no-match",
+      "latency_ms": 207.36564899561927
+    }
+  ]
+}

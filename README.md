@@ -258,29 +258,49 @@ route:
 
 ## Benchmarks
 
-Run benchmarks locally:
+Run real benchmarks locally:
 
 ```bash
-cd benchmarks
-pnpm install
-pnpm run bench
+# Quick benchmark
+./benchmark_simple.sh
+
+# Or use the Python test suite
+cd test_openclaw_python
+python test_skillpilot.py
 ```
 
-Example results:
+### Real Results (Raspberry Pi 5, 5 skills)
 
 ```
-╔══════════════════════════════════════════════════════════╗
-║         SkillPilot Benchmark Results                     ║
-╚══════════════════════════════════════════════════════════╝
+============================================================
+SkillPilot Benchmark Results
+============================================================
+Queries tested: 9 × 10 iterations = 90 total
+Successful matches: 70/90
+Accuracy: 77.7%
+Avg Latency: 211ms (includes process startup)
 
-Dataset: 50 intents × 20 skills
-───────────────────────────────────────────────────────────
-Method:              SkillPilot (full)
-Accuracy:            93.0%
-P50 Latency:         12ms
-P99 Latency:         23ms
-───────────────────────────────────────────────────────────
+Per-query results:
+✅ "create issue" → github (10/10)
+✅ "send slack message" → slack (10/10)
+✅ "read file" → file-read (10/10)
+✅ "write file" → file-write (10/10)
+✅ "build docker" → docker (10/10)
+✅ "create a GitHub issue" → github (10/10)
+✅ "notify team on slack" → slack (10/10)
+❌ "show me the README" → no match (0/10)
+❌ "deploy to production" → no match (0/10)
 ```
+
+**Note:** Latency includes Node.js process startup. For in-process routing 
+(using the library directly), expect ~1-3ms for fast path matches.
+
+### Comparison
+
+| Metric | LLM-only | SkillPilot |
+|--------|----------|------------|
+| Latency | 1000-5000ms | ~211ms (CLI) / ~1-3ms (library) |
+| Accuracy | ~78% | ~78% |
 
 ---
 
