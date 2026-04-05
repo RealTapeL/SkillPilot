@@ -203,6 +203,8 @@ No manual configuration needed. Install a skill → it can be routed.
 "deploy to production" → aws (semantic match, 5ms)
 ```
 
+> **⚠️ Configuration Notice:** The 89.7% accuracy was achieved with `hardRouteThreshold: 0.30` (lower than design value 0.80) to boost match rate. This increases false positive risk. For production, consider using `0.70`+ and monitoring feedback.
+
 ### 🤝 Conflict-Aware Routing
 
 Automatically detects and resolves conflicts between similar skills (e.g., `github` vs `github-advanced`):

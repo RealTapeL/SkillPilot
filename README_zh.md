@@ -203,6 +203,8 @@ SkillPilot 自动解析任意 `SKILL.md` 并提取：
 "deploy to production" → aws (语义匹配, 5ms)
 ```
 
+> **⚠️ 配置提示：** 89.7% 的准确率使用 `hardRouteThreshold: 0.30` 达成（低于设计值 0.80），以提高匹配率。这会增加误路由风险。生产环境建议使用 `0.70` 或更高，并监控反馈数据。
+
 ### 🤝 冲突感知路由
 
 自动检测并解决相似技能之间的冲突（如 `github` vs `github-advanced`）：

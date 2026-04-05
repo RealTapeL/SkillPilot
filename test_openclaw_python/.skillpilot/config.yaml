@@ -1,11 +1,16 @@
 # SkillPilot Test Configuration
-# 降低阈值以提高匹配率
+# ⚠️ 警告：此配置仅用于测试，通过降低阈值提高匹配率
+# 生产环境建议使用更高的 hardRouteThreshold (0.70+)
 
 router:
-  hardRouteThreshold: 0.30    # 降低硬路由阈值
-  softInjectThreshold: 0.15   # 降低软注入阈值
+  # hardRouteThreshold: 0.30 是测试专用值！
+  # - 设计值：0.80（置信度>80%才直接执行技能）
+  # - 测试值：0.30（置信度>30%就执行，提高通过率但增加误路由风险）
+  hardRouteThreshold: 0.30
+  
+  softInjectThreshold: 0.15
   enableSemantic: true
-  fastRouteMinScore: 6        # 降低快速路径阈值
+  fastRouteMinScore: 6        # 从默认值 8 降低到 6，捕获更多模糊匹配
 
 embed:
   provider: local-onnx
