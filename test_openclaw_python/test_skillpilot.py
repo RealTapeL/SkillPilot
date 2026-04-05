@@ -257,42 +257,97 @@ class SkillPilotTester:
         console.print(f"\n[green]Results saved to {output_path}[/green]")
 
 
-# 测试用例定义
+# 测试用例定义 - 扩展至 10 skills, 40+ 测试用例
 TEST_CASES = [
-    # GitHub 相关 - 使用技能中定义的 triggers
+    # ========== GitHub (github) ==========
     TestCase("create issue", "github", "Create GitHub issue (trigger)"),
     TestCase("open a PR", "github", "Open PR (trigger)"),
     TestCase("review pull request", "github", "Review PR (trigger)"),
     TestCase("list my repos", "github", "List repos (trigger)"),
     TestCase("check CI status", "github", "Check CI (trigger)"),
-    # GitHub 语义匹配
+    # 语义匹配
     TestCase("create a GitHub issue", "github", "Create GitHub issue"),
     TestCase("open a pull request on github", "github", "Open PR"),
     TestCase("list my GitHub repositories", "github", "List repos"),
+    # 模糊查询
+    TestCase("I need to create an issue", "github", "Fuzzy: create issue"),
+    TestCase("can you check the CI pipeline", "github", "Fuzzy: check CI"),
     
-    # Slack 相关 - 使用技能中定义的 triggers
+    # ========== Slack (slack) ==========
     TestCase("send slack message", "slack", "Send Slack message (trigger)"),
     TestCase("notify team", "slack", "Notify team (trigger)"),
     TestCase("post to channel", "slack", "Post to channel (trigger)"),
-    # Slack 语义匹配
+    # 语义匹配
     TestCase("send a message to Slack", "slack", "Send Slack message"),
     TestCase("notify the team on slack", "slack", "Notify team"),
+    # 模糊查询
+    TestCase("let everyone know", "slack", "Fuzzy: notify"),
+    TestCase("message the channel", "slack", "Fuzzy: send message"),
     
-    # 文件操作 - 使用技能中定义的 triggers
+    # ========== File Read (file-read) ==========
     TestCase("read file", "file-read", "Read file (trigger)"),
     TestCase("show content", "file-read", "Show content (trigger)"),
+    # 语义匹配
+    TestCase("read the README.md file", "file-read", "Read file"),
+    TestCase("show me the README", "file-read", "Fuzzy: show README - was failing"),
+    TestCase("display the contents of config.json", "file-read", "Fuzzy: display contents"),
+    TestCase("cat the log file", "file-read", "Fuzzy: cat log"),
+    
+    # ========== File Write (file-write) ==========
     TestCase("write file", "file-write", "Write file (trigger)"),
     TestCase("save file", "file-write", "Save file (trigger)"),
-    # 文件操作语义匹配
-    TestCase("read the README.md file", "file-read", "Read file"),
+    # 语义匹配
     TestCase("write output to results.txt", "file-write", "Write file"),
+    TestCase("save this to a file", "file-write", "Fuzzy: save to file"),
+    TestCase("update the config", "file-write", "Fuzzy: update config"),
     
-    # Docker 相关 - 使用技能中定义的 triggers
+    # ========== Docker (docker) ==========
     TestCase("build docker", "docker", "Build Docker (trigger)"),
     TestCase("docker build", "docker", "Docker build (trigger)"),
-    # Docker 语义匹配
+    # 语义匹配
     TestCase("build a Docker image", "docker", "Build Docker"),
     TestCase("run a docker container", "docker", "Run container"),
+    TestCase("start the container", "docker", "Fuzzy: start container"),
+    
+    # ========== Git (git) ==========
+    TestCase("git commit", "git", "Git commit (trigger)"),
+    TestCase("create branch", "git", "Create branch (trigger)"),
+    TestCase("git status", "git", "Git status (trigger)"),
+    # 语义匹配
+    TestCase("commit these changes", "git", "Fuzzy: commit changes"),
+    TestCase("switch to main branch", "git", "Fuzzy: switch branch"),
+    TestCase("show me the git log", "git", "Fuzzy: show log"),
+    TestCase("what changed", "git", "Fuzzy: git diff"),
+    
+    # ========== AWS (aws) ==========
+    TestCase("deploy to AWS", "aws", "Deploy AWS (trigger)"),
+    TestCase("create S3 bucket", "aws", "Create S3 bucket (trigger)"),
+    # 模糊查询 - 之前失败的
+    TestCase("deploy to production", "aws", "Fuzzy: deploy production - was failing"),
+    TestCase("push this live", "aws", "Fuzzy: push live"),
+    TestCase("upload to the cloud", "aws", "Fuzzy: upload cloud"),
+    
+    # ========== NPM (npm) ==========
+    TestCase("npm install", "npm", "NPM install (trigger)"),
+    TestCase("npm run", "npm", "NPM run (trigger)"),
+    # 语义匹配
+    TestCase("install dependencies", "npm", "Fuzzy: install deps"),
+    TestCase("run the build script", "npm", "Fuzzy: run build"),
+    TestCase("npm test", "npm", "NPM test (trigger)"),
+    
+    # ========== Python (python) ==========
+    TestCase("run python", "python", "Run Python (trigger)"),
+    TestCase("pip install", "python", "Pip install (trigger)"),
+    # 语义匹配
+    TestCase("execute the script", "python", "Fuzzy: execute script"),
+    TestCase("run pytest", "python", "Fuzzy: run tests"),
+    
+    # ========== Database (database) ==========
+    TestCase("query database", "database", "Query DB (trigger)"),
+    TestCase("show tables", "database", "Show tables (trigger)"),
+    # 语义匹配
+    TestCase("get all users from the database", "database", "Fuzzy: query users"),
+    TestCase("run the migration", "database", "Fuzzy: run migration"),
 ]
 
 
