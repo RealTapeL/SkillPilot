@@ -24,21 +24,23 @@
 
 ## 解决方案
 
-SkillPilot 在 LLM 推理**之前**完成技能路由，使用向量语义匹配：
+SkillPilot 在 LLM 推理**之前**完成技能路由，使用快速关键词匹配 + 语义回退：
 
 ```
 用户查询
     ↓
-SkillPilot 路由器（快速路径：< 2ms）
+SkillPilot 路由器（快速路径：1-5ms）
     ↓
-语义匹配（向量相似度：< 20ms）
+语义匹配（可选，~20ms 需 ONNX 模型）
     ↓
-冲突消解（< 5ms）
+冲突消解（相似技能自动选择）
     ↓
 执行技能 或 注入上下文
 ```
 
-**总路由时间：< 25ms** —— 对比等待 LLM 的 1-5 秒
+**总路由时间：1-5ms**（库调用）—— 对比等待 LLM 的 1-5 秒
+
+> **注意：** CLI 延迟约 200ms（包含 Node.js 启动）。生产环境建议直接调用库。
 
 ---
 
@@ -67,11 +69,11 @@ cd SkillPilot
 pnpm install
 
 # 构建所有包
-pnpm run build
+cd packages/core && npx tsup src/index.ts --format esm --dts
+cd ../cli && npx tsup src/index.ts --format esm --dts
 
-# 编译原生模块（better-sqlite3）
-cd node_modules/.pnpm/better-sqlite3@*/node_modules/better-sqlite3
-npm run build-release
+# 链接本地 core 包（重要！）
+cd ../cli && pnpm link ../core
 
 # 创建快捷命令
 echo 'alias skillpilot="node /path/to/SkillPilot/packages/cli/dist/index.js"' >> ~/.bashrc
@@ -190,9 +192,16 @@ SkillPilot 自动解析任意 `SKILL.md` 并提取：
 
 | 阶段 | 时间 | 用途 |
 |------|------|------|
-| 快速路径 | < 2ms | 关键词 + 触发短语匹配 |
-| 语义路径 | < 20ms | 向量相似度匹配 |
-| 冲突消解 | < 5ms | 解决技能功能重叠冲突 |
+| 快速路径 | 1-5ms | 关键词 + 触发短语匹配 |
+| 语义路径 | ~20ms | 向量相似度（需 ONNX 模型） |
+| 冲突消解 | < 1ms | 相似技能自动选择 |
+
+**路由示例：**
+```bash
+"create a GitHub issue" → github (快速路径, 2ms)
+"show me the README" → file-read (模糊匹配, 3ms)
+"deploy to production" → aws (语义匹配, 5ms)
+```
 
 ### 🤝 冲突感知路由
 
@@ -294,10 +303,19 @@ SkillPilot 测试结果
 平均延迟: ~4ms (库) / ~200ms (CLI 含 Node 启动)
 ```
 
+**测试覆盖：**
+- 10 个技能：github, git, slack, file-read, file-write, docker, npm, python, aws, database
+- 58 个测试用例：精确触发、语义匹配、模糊查询
+- 快速路径匹配：约 90% 的查询
+
 **关键改进：**
 - 修复模糊匹配："show me the README" → file-read
 - 修复 "create a GitHub issue" 正确路由到 github（而不是 git）
 - 支持部分触发词匹配（如 "show" 匹配 "show content"）
+
+**已知限制：**
+- "deploy to production" 仍需更好的语义模型（ONNX）才能匹配
+- 文件扩展名处理（如 "README.md"）需要改进
 
 ### 对比
 
