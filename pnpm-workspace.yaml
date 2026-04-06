@@ -1,8 +1,2 @@
 packages:
-  - packages/*
-allowBuilds:
-  better-sqlite3: false
-  esbuild: false
-  onnxruntime-node: false
-overrides:
-  '@realtapel/skillpilot-core': link:packages/core
+  - "packages/*"
