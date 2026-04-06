@@ -9,7 +9,7 @@
 
 ---
 
-## 🚀 Quick Start (3 Steps)
+## Quick Start (3 Steps)
 
 ```bash
 # 1. Clone
@@ -30,7 +30,7 @@ skillpilot route "create a GitHub issue"
 
 ---
 
-## 📖 Overview
+## Overview
 
 ### The Problem
 
@@ -64,7 +64,7 @@ Execute Skill OR Inject Context
 
 ---
 
-## 📦 Installation
+## Installation
 
 ### Method 1: Global Install (Recommended)
 
@@ -92,7 +92,7 @@ pnpm cli route "create GitHub issue"
 
 ---
 
-## 💡 Usage
+## Usage
 
 ### CLI Commands
 
@@ -133,7 +133,7 @@ console.log(result.latencyMs);    // 2
 
 ---
 
-## 🏆 Benchmark Results
+## Benchmark Results
 
 ### Real Results (Raspberry Pi 5, 10 skills, 58 test cases)
 
@@ -170,7 +170,7 @@ Avg Latency: ~4ms (library) / ~200ms (CLI with Node startup)
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -197,7 +197,7 @@ Avg Latency: ~4ms (library) / ~200ms (CLI with Node startup)
 
 ### Key Features
 
-#### ⚡ Three-Stage Routing
+#### Three-Stage Routing
 
 | Stage | Time | Purpose |
 |-------|------|---------|
@@ -214,7 +214,7 @@ Avg Latency: ~4ms (library) / ~200ms (CLI with Node startup)
 
 > **⚠️ Configuration Notice:** The 89.7% accuracy was achieved with `hardRouteThreshold: 0.30` (lower than design value 0.80) to boost match rate. This increases false positive risk. For production, consider using `0.70`+ and monitoring feedback.
 
-#### 🤝 Conflict-Aware Routing
+#### Conflict-Aware Routing
 
 Automatically detects and resolves conflicts between similar skills (e.g., `github` vs `github-advanced`):
 
@@ -225,7 +225,7 @@ Conflict Group A (similarity 0.91):
   Tip: Add route.prefer_when to disambiguate
 ```
 
-#### 🔄 Self-Learning
+#### Self-Learning
 
 Records routing feedback and automatically adjusts weights:
 
@@ -236,7 +236,7 @@ skillpilot feedback correct --wrong slack --right slack-advanced --query "bulk s
 
 ---
 
-## 🛠️ Development
+## Development
 
 ```bash
 # Install dependencies
@@ -255,7 +255,7 @@ python test_skillpilot.py
 
 ---
 
-## 📚 Packages
+## Packages
 
 | Package | Description | npm |
 |---------|-------------|-----|
@@ -266,7 +266,7 @@ python test_skillpilot.py
 
 ---
 
-## 📝 License
+## License
 
 MIT
 
