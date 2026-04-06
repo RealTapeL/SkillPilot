@@ -146,11 +146,20 @@ export class SkillRouter {
   }
 
   /**
+   * Initialize the router.
+   * Prepares semantic router with fallback detection.
+   */
+  async initialize(): Promise<void> {
+    const fingerprints = await this.index.getAll();
+    await this.semanticRouter.initialize(fingerprints);
+  }
+
+  /**
    * Route a query to the best matching skill.
    * 
    * Three-stage routing with automatic fallback:
    * 1. Fast path (keywords) → immediate return if score >= threshold
-   * 2. Semantic path (vectors) → if fast path fails and enabled
+   * 2. Semantic path (vectors/BM25) → if fast path fails and enabled
    * 3. Fallback → low-confidence fast match if available
    * 
    * @param query - User query string
@@ -162,6 +171,9 @@ export class SkillRouter {
     const t0 = performance.now();
     
     try {
+      // Ensure initialized
+      await this.initialize();
+
       // Get all skill fingerprints
       let fingerprints: SkillFingerprint[];
       try {
@@ -220,7 +232,7 @@ export class SkillRouter {
         };
       }
 
-      // Stage 2: Semantic Path (embedding matching)
+      // Stage 2: Semantic Path (embedding matching with BM25 fallback)
       if (!this.config.enableSemantic) {
         return {
           skill: null,

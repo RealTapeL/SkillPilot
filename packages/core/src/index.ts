@@ -8,6 +8,7 @@
 export { EmbedProvider, cosineSimilarity, normalizeVector } from './embed/EmbedProvider.js';
 export { LocalEmbedProvider } from './embed/LocalEmbed.js';
 export { OpenAIEmbedProvider, type OpenAIEmbedConfig } from './embed/OpenAIEmbed.js';
+export { LightweightMatcher } from './embed/LightweightMatcher.js';
 
 // Fingerprinting
 export { 
