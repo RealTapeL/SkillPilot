@@ -6,11 +6,14 @@
  */
 
 import { 
-  SkillRouter, 
   SkillIndex, 
   LocalEmbedProvider,
   SkillFingerprint,
-  FeedbackRecorder
+  FeedbackRecorder,
+  ClawHubAwareRouter,
+  GradualAdoptionManager,
+  adoptionManager,
+  clawHubClient
 } from '@realtapel/skillpilot-core';
 
 // Types for OpenClaw Plugin SDK (mocked for now)
@@ -25,6 +28,8 @@ interface OpenClawConfig {
   softInjectThreshold: number;
   showRoutingInfo: boolean;
   showConflictInfo: boolean;
+  enableClawHubSearch: boolean;
+  autoInstallSkills: boolean;
 }
 
 interface HookContext {
@@ -65,19 +70,27 @@ function formatConflicts(groups: Array<{ id: string; skillIds: string[] }>): str
 
 // Main plugin entry
 export class OpenClawAdapter {
-  private router: SkillRouter | null = null;
+  private router: ClawHubAwareRouter | null = null;
   private index: SkillIndex | null = null;
   private feedbackRecorder: FeedbackRecorder | null = null;
+  private adoptionManager: GradualAdoptionManager | null = null;
 
   async initialize(api: OpenClawAPI, skillDir: string): Promise<void> {
     const embed = new LocalEmbedProvider();
     await embed.initialize();
 
     this.index = await SkillIndex.load(skillDir);
-    this.router = new SkillRouter(this.index, embed, {
-      hardRouteThreshold: api.config.hardRouteThreshold,
-      softInjectThreshold: api.config.softInjectThreshold
-    });
+    this.adoptionManager = adoptionManager;
+    
+    // Initialize with ClawHub-aware router
+    this.router = new ClawHubAwareRouter(
+      this.index, 
+      embed,
+      {
+        hardRouteThreshold: api.config.hardRouteThreshold,
+        softInjectThreshold: api.config.softInjectThreshold
+      }
+    );
     this.feedbackRecorder = new FeedbackRecorder(this.index);
 
     this.registerHooks(api);
@@ -89,25 +102,56 @@ export class OpenClawAdapter {
     api.registerHook('before_dispatch', async (ctx: HookContext): Promise<HookResult | void> => {
       if (!this.router) return;
 
-      const result = await this.router.route(ctx.message.text);
+      // Use ClawHub-aware routing
+      const result = await this.router.routeWithClawHub(ctx.message.text);
 
-      if (result.confidence >= api.config.hardRouteThreshold && result.skill) {
-        // High confidence: inject skill context
+      // Check for ClawHub results (low/no local match)
+      if (api.config.enableClawHubSearch && result.clawHubResults?.matched) {
+        const clawHubSkills = result.clawHubResults.skills;
+        if (clawHubSkills.length > 0) {
+          // Show ClawHub suggestions to user
+          const suggestions = clawHubSkills
+            .slice(0, 3)
+            .map((s: { skill: { name: string; description: string }; confidence: number }) => 
+              `  • ${s.skill.name} (${(s.confidence * 100).toFixed(0)}%) - ${s.skill.description}`
+            )
+            .join('\n');
+          
+          ctx.appendFooter(`\n💡 Found skills in ClawHub that might help:\n${suggestions}`);
+        }
+      }
+
+      // High confidence AND can auto-execute (not in observation stage)
+      if (result.confidence >= api.config.hardRouteThreshold && result.skill && result.canAutoExecute) {
         ctx.injectSystemContext(buildSkillContext(result.skill));
         ctx.setMetadata('skillpilot', result);
 
+        let footerNotes: string[] = [];
+        
         if (result.conflictResolved && api.config.showConflictInfo) {
-          ctx.appendFooter(
-            `\n_SkillPilot: chose \`${result.skill.name}\` over [${result.conflictAlternatives?.join(', ')}]_`
-          );
+          footerNotes.push(`chose \`${result.skill.name}\` over [${result.conflictAlternatives?.join(', ')}]`);
+        }
+
+        // Show adoption stage info
+        if (result.adoptionStage && result.adoptionStage !== 'trusted') {
+          footerNotes.push(`${result.skill.name} in ${result.adoptionStage} stage`);
+        }
+
+        if (footerNotes.length > 0) {
+          ctx.appendFooter(`\n_SkillPilot: ${footerNotes.join(' · ')}_`);
         }
 
         return { cancel: false };
       }
 
+      // Medium confidence: soft inject context
       if (result.confidence >= api.config.softInjectThreshold && result.skill) {
-        // Medium confidence: soft inject context
         ctx.injectSystemContext(buildSoftContext(result.skill));
+        
+        // Show adoption stage for new skills
+        if (result.adoptionStage && result.adoptionStage !== 'trusted') {
+          ctx.appendFooter(`\n_SkillPilot: ${result.skill.name} in ${result.adoptionStage} stage_`);
+        }
       }
     });
 
@@ -134,7 +178,7 @@ export class OpenClawAdapter {
 
         if (subcmd === 'explain') {
           const query = args.slice(1).join(' ');
-          const result = await this.router.route(query, { trace: true });
+          const result = await this.router.routeWithClawHub(query);
           ctx.reply(JSON.stringify(result, null, 2));
         } else if (subcmd === 'conflicts') {
           const conflicts = this.index.getConflictGroups();
@@ -142,9 +186,53 @@ export class OpenClawAdapter {
         } else if (subcmd === 'stats') {
           const stats = this.index.getStats();
           ctx.reply(formatStats(stats));
+        } else if (subcmd === 'search') {
+          const query = args.slice(1).join(' ');
+          const results = await clawHubClient.searchSkills(query);
+          const formatted = results.map((r: { name: string; rating: number; description: string }) => 
+            `• ${r.name} (⭐${r.rating})\n  ${r.description}`
+          ).join('\n\n');
+          ctx.reply(`ClawHub search results for "${query}":\n\n${formatted}`);
+        } else if (subcmd === 'adoption') {
+          const skillName = args[1];
+          if (skillName && this.adoptionManager) {
+            const stats = this.adoptionManager.getAdoptionStats(skillName);
+            if (stats) {
+              ctx.reply(`Skill adoption status for ${skillName}:\n` +
+                `• Stage: ${stats.stage}\n` +
+                `• Usage count: ${stats.observationCount}\n` +
+                `• Success rate: ${(stats.successRate * 100).toFixed(1)}%\n` +
+                `• Effective weight: ${(stats.weight * 100).toFixed(0)}%`
+              );
+            } else {
+              ctx.reply(`No adoption data for ${skillName} (fully trusted skill)`);
+            }
+          } else {
+            ctx.reply('Usage: skillpilot adoption <skill-name>');
+          }
+        } else if (subcmd === 'feedback') {
+          const skillName = args[1];
+          const feedback = args[2] === 'good' ? true : args[2] === 'bad' ? false : null;
+          
+          if (skillName && feedback !== null && this.adoptionManager) {
+            this.adoptionManager.recordFeedback(skillName, feedback);
+            const stats = this.adoptionManager.getAdoptionStats(skillName);
+            ctx.reply(`Recorded ${feedback ? 'positive' : 'negative'} feedback for ${skillName}\n` +
+              `New stage: ${stats?.stage || 'trusted'}`);
+          } else {
+            ctx.reply('Usage: skillpilot feedback <skill-name> good|bad');
+          }
         } else {
           const stats = this.index.getStats();
-          ctx.reply(formatStats(stats));
+          ctx.reply(formatStats(stats) + 
+            `\n\nCommands available:\n` +
+            `  skillpilot stats - Show status\n` +
+            `  skillpilot explain <query> - Debug routing\n` +
+            `  skillpilot conflicts - Show skill conflicts\n` +
+            `  skillpilot search <query> - Search ClawHub\n` +
+            `  skillpilot adoption <skill-name> - Check adoption stage\n` +
+            `  skillpilot feedback <skill-name> good|bad - Give feedback`
+          );
         }
       }
     });

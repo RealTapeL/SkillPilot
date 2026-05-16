@@ -65,6 +65,26 @@ export {
   DEFAULT_FEEDBACK_CONFIG 
 } from './feedback/FeedbackRecorder.js';
 
+// ClawHub Integration
+export { 
+  ClawHubClient, 
+  clawHubClient,
+  type ClawHubSkill, 
+  type ClawHubSearchOptions 
+} from './clawhub/ClawHubClient.js';
+export { 
+  ClawHubAwareRouter, 
+  type ClawHubRouteResult 
+} from './clawhub/ClawHubRouter.js';
+export {
+  GradualAdoptionManager,
+  adoptionManager,
+  type AdoptionStage,
+  type SkillAdoptionState,
+  type AdoptionConfig,
+  DEFAULT_ADOPTION_CONFIG
+} from './clawhub/GradualAdoption.js';
+
 // Config
 export {
   ConfigManager,
