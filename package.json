@@ -10,8 +10,13 @@
     "install:all": "pnpm install",
     "build:all": "pnpm -r build",
     "clean:all": "pnpm -r clean",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "cli": "node packages/cli/dist/index.js",
     "setup": "pnpm install:all && pnpm build:all && pnpm --filter cli global",
-    "demo": "pnpm cli index ~/.openclaw/skills && pnpm cli route \"create a GitHub issue\""
+    "demo": "pnpm cli index test_openclaw_python/skills && pnpm cli route \"create a GitHub issue\""
+  },
+  "devDependencies": {
+    "vitest": "^2.0.0"
   }
 }

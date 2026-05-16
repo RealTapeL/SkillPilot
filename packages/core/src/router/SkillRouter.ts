@@ -20,6 +20,7 @@ import { FastRouter } from './FastRouter.js';
 import { SemanticRouter } from './SemanticRouter.js';
 import { ConflictResolver, ConflictResolutionResult } from './ConflictResolver.js';
 import { EmbedProvider } from '../embed/EmbedProvider.js';
+import { GradualAdoptionManager, adoptionManager } from '../clawhub/GradualAdoption.js';
 
 /**
  * Configuration options for the skill router
@@ -65,6 +66,10 @@ export interface RouteResult {
   latencyMs: number;
   /** Detailed routing trace (if requested) */
   trace?: RouteTrace;
+  /** Skill adoption stage (for gradual adoption) */
+  adoptionStage?: string;
+  /** Whether this skill can be auto-executed */
+  canAutoExecute?: boolean;
 }
 
 /**
@@ -126,6 +131,7 @@ export class SkillRouter {
   private semanticRouter: SemanticRouter;
   private conflictResolver: ConflictResolver;
   private config: RouterConfig;
+  protected adoptionManager: GradualAdoptionManager;
 
   /**
    * Create a new SkillRouter instance.
@@ -137,12 +143,14 @@ export class SkillRouter {
   constructor(
     private index: SkillIndex,
     embed: EmbedProvider,
-    config: Partial<RouterConfig> = {}
+    config: Partial<RouterConfig> = {},
+    adoptionMgr?: GradualAdoptionManager
   ) {
     this.config = { ...DEFAULT_ROUTER_CONFIG, ...config };
     this.fastRouter = new FastRouter();
     this.semanticRouter = new SemanticRouter(embed);
     this.conflictResolver = new ConflictResolver(index);
+    this.adoptionManager = adoptionMgr || adoptionManager;
   }
 
   /**
@@ -403,7 +411,8 @@ export class SkillRouter {
     trace?: RouteTrace
   ): RouteResult {
     const baseConfidence = data.confidence;
-    const finalConfidence = baseConfidence * (data.skill?.feedbackWeight ?? 1);
+    const adoptionWeight = data.skill ? this.adoptionManager.getEffectiveWeight(data.skill) : 1.0;
+    const finalConfidence = baseConfidence * (data.skill?.feedbackWeight ?? 1) * adoptionWeight;
 
     return {
       skill: data.skill,
@@ -413,6 +422,8 @@ export class SkillRouter {
       conflictAlternatives: data.alternatives,
       resolutionReason: data.resolutionReason,
       latencyMs: performance.now() - t0,
+      adoptionStage: data.skill ? this.adoptionManager.getStage(data.skill.id) : 'trusted',
+      canAutoExecute: data.skill ? this.adoptionManager.canAutoExecute(data.skill) : true,
       trace
     };
   }

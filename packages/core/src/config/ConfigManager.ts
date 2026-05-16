@@ -130,7 +130,9 @@ export const CONFIG_PRESETS = {
     }
   },
   /** Balanced (default) */
-  balanced: DEFAULT_CONFIG.router,
+  balanced: {
+    router: DEFAULT_CONFIG.router
+  },
   /** Test environment - relaxed thresholds */
   test: {
     router: {
